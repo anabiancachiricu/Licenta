@@ -1,26 +1,59 @@
 ﻿
 @{
-ViewBag.Title = "Afisare utilizatori";
+    ViewBag.Title = "Afisare utilizatori";
 }
 
 <ol class="breadcrumb">
     <li><h3>@ViewBag.Title</h3></li>
 </ol>
 
-@foreach (var user in ViewBag.UsersList)
-{
-    <div class="panel-heading">Nume utilizator: @user.UserName</div>
-    <div class="panel-body">
-        <i class="glyphicon glyphicon-envelope"></i> Email utilizator: <span class="label label-default">@user.Email</span>
-    <br /><br />
-    @if (@user.PhoneNumber != null)
-    {
-         <i class="glyphicon glyphicon-phone"></i>@:Telefon utilizator:<span class="label label-default">@user.PhoneNumber</span>
-    }
-    </div>
-    <div class="panel-footer">
-        <a class="btn btn-sm btn-success" href="/Users/Edit/@user.Id"> Editare utilizator</a>
-        <a class="btn btn-sm btn-success" href="/Users/Show/@user.Id"> Vizualizare utilizator</a>
-    </div>
-    <br /><br />
-}
+<body style="background-color: #eee">
+
+    <ul class="list-group list-group-light align-content-center align-items-center">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="row align-content-center align-items-center">
+
+                @foreach (var user in ViewBag.UsersList)
+                {
+                    <div class="col-xl-6 col-lg-4  mb-4 ">
+
+                        <div class="card">
+
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">@user.UserName</p>
+                                            <p class="text-muted mb-0">@user.Email</p>
+                                        </div>
+                                    </div>
+                                    <span class="badge rounded-pill badge-success"></span>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">
+                                <a class="btn btn-link m-0 text-reset"
+                                   href="/Users/Edit/@user.Id"
+                                   role="button"
+                                   data-ripple-color="primary">
+                                    Edit
+                                </a>
+                                <a class="btn btn-link m-0 text-reset"
+                                   href="/Users/Show/@user.Id"
+                                   role="button"
+                                   data-ripple-color="primary">
+                                    Show
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                }
+
+
+            </div>
+        </li>
+    </ul>
+</body>
