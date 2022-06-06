@@ -13,6 +13,8 @@ namespace MedOffice.Models
     {
        // public IEnumerable<SelectListItem> AllRoles { get; internal set; }
         public IEnumerable<SelectListItem> AllRoles { get; set; }
+        //Save the user profile picture
+        public byte[] UserPhoto { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -1,45 +1,100 @@
 ﻿@model MedOffice.Models.ApplicationUser
 
-@using (Html.BeginForm(actionName: "Edit", controllerName: "Users", routeValues: new{ id = @Model.Id }))
-{
-    @Html.HttpMethodOverride(HttpVerbs.Put)
 
-    <br />
+<body style="background-color: #eee;">
 
-    <i class="glyphicon glyphicon-user"></i>
-    
-    @Html.Label("UserName", "Nume utilizator", new { @class = "" })
-    
-    <br />
-    
-    @Html.EditorFor(m => m.UserName)
-    
-    <br /><br />
-    
-    <i class="glyphicon glyphicon-envelope"></i>
-    @Html.Label("Email", "Email utilizator", new { @class = "" })
-    
-    <br />
-    
-    @Html.EditorFor(m => m.Email)
-    <br />
-    <br />
-    <i class="glyphicon glyphicon-phone"></i>
-    @Html.Label("PhoneNumber", "Numar telefon")
-    
-    <br />
-    
-    @Html.EditorFor(m => m.PhoneNumber)
-    
-    <br /><br />
-    
-    <i class="glyphicon glyphicon-th-list"></i>
-    <label>Selectati rolul</label>
-    @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text",
-    ViewBag.userRole), null, new { @class = "form-control" })
-    <br />
-    <button class="btn btn-sm btn-success" type="submit">
-        Modifica datele
-        utilizatorului
-    </button>
-}
+    <section class="vh-100">
+        <div class="container h-100 align-content-center align-items-center">
+           
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black align-content-center align-items-center" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Editare Utilizator </p>
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Users", routeValues: new { id = @Model.Id }))
+                                    {
+                                        @Html.HttpMethodOverride(HttpVerbs.Put)
+
+
+                                        <div class="form-group">
+
+                                            @Html.Label("UserName", "Nume utilizator", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+
+                                            @Html.Label("Email", "Email utilizator", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+
+                                            @Html.Label("PhoneNumber", "Numar telefon", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+                                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <i class="glyphicon glyphicon-th-list"></i>
+                                            <label>Selectati rolul</label>
+                                            @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text",
+                                            ViewBag.userRole), null, new { @class = "form-control" })
+                                        </div>
+                                        <br />
+                                        <div class="form-group">
+                                            <div class="row mb-4">
+                                                <div class="col d-flex justify-content-center">
+
+                                                    <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                        <button class="btn btn-sm btn-success" type="submit">
+                                                            Modifica datele
+                                                            utilizatorului
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img src="https://cdn.dribbble.com/users/1044993/screenshots/11221617/media/1c8967ae3d3ef8bc872b5271367a07f0.png?compress=1&resize=400x300&vertical=top"
+                                         class="img-fluid" alt="Sample image" />
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</body>
