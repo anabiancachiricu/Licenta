@@ -60,9 +60,10 @@
                                             <i class="glyphicon glyphicon-th-list"></i>
                                             <label>Selectati rolul</label>
                                             @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text",
-                                            ViewBag.userRole), null, new { @class = "form-control" })
+                     ViewBag.userRole), null, new { @class = "form-control" })
                                         </div>
-                                        <br />
+                                        <br />     
+                                        
                                         <div class="form-group">
                                             <div class="row mb-4">
                                                 <div class="col d-flex justify-content-center">

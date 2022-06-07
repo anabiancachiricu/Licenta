@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<h1>Afisare Locatie</h1>
+<h2>@ViewBag.Location.City</h2>
+<p>@ViewBag.Location.Address</p>
+
+
+
+<a href="/Location/Edit/@ViewBag.Location.Id">Modifica Locatie</a>
+<form method="post" action="/Locations/Delete/@ViewBag.Location.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    <button type="submit">Sterge Locatie</button>
+</form>
+<hr />
+<a href="/Locations/Index">Inapoi la locatii</a>
+<br />
+<a href="/Locations/New">Adauga locatie</a>
+

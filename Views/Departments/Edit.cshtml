@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post" action="/Departments/Edit/@ViewBag.Department.DepartmentId">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <label>Nume</label>
+    <br />
+    <input type="text" name="DepartmentName" value="@ViewBag.Department.DepartmentName" />
+    <br /><br />
+    <label>Descriere</label>
+    <br />
+    <textarea type="text" name="DepartmentDescription" value="@ViewBag.Department.DepartmentDescription" ></textarea>
+    <br /><br />
+    
+    <br />
+    <button type="submit">Modifica Departament</button>
+</form>
+

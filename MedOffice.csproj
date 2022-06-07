@@ -165,7 +165,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
+    <Compile Include="Controllers\DoctorDetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,7 +182,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\DoctorDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Investigation.cs" />
     <Compile Include="Models\Location.cs" />
@@ -371,6 +374,18 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Show.cshtml" />
+    <Content Include="Views\DoctorDetails\Index.cshtml" />
+    <Content Include="Views\DoctorDetails\Show.cshtml" />
+    <Content Include="Views\DoctorDetails\Edit.cshtml" />
+    <Content Include="Views\Locations\Index.cshtml" />
+    <Content Include="Views\Locations\Show.cshtml" />
+    <Content Include="Views\Locations\New.cshtml" />
+    <Content Include="Views\Locations\Edit.cshtml" />
+    <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
+    <Content Include="Views\Departments\Show.cshtml" />
+    <Content Include="Views\Departments\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202206011148207_Initial.resx">

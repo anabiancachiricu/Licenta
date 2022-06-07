@@ -18,7 +18,7 @@ namespace MedOffice.Models
         public virtual Department Department { get; set; }
 
         public virtual ICollection<Location> Locations { get; set; }
-        public virtual ICollection<Doctor> Doctors { get; set; }
+        public virtual ICollection<DoctorDetails> Doctors { get; set; }
 
 
 

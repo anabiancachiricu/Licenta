@@ -11,7 +11,7 @@ namespace MedOffice.Models
         [Key]
         public int AppointmentId { get; set; }
         [Required]
-        public virtual Doctor Doctor { get; set; }
+        public virtual DoctorDetails Doctor { get; set; }
         [Required]
         public virtual ApplicationUser User { get; set; }
         [Required]

@@ -11,6 +11,9 @@ namespace MedOffice.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        
     }
 
     public class ExternalLoginListViewModel
@@ -82,8 +85,12 @@ namespace MedOffice.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        [Display(Name ="UserPhoto")]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+        
+        [Display(Name ="User Photo")]
         public byte[] UserPhoto { get; set; }
     }
 

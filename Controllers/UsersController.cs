@@ -9,12 +9,13 @@ using System.Web.Mvc;
 
 namespace MedOffice.Controllers
 {
-    [Authorize(Roles ="Administrator")]
+    
     public class UsersController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
-
+        
         // GET: Users
+        [Authorize(Roles ="Administrator")]
         public ActionResult Index()
         {
             var users = from user in db.Users
@@ -24,10 +25,15 @@ namespace MedOffice.Controllers
             return View();
         }
 
+
+        //afisare un utilizator
+        [Authorize(Roles ="Administrator")]
         public ActionResult Show(string id)
         {
             ApplicationUser user = db.Users.Find(id);
             ViewBag.utilizatorCurent = User.Identity.GetUserId();
+            ViewBag.userName = user.UserName;
+            ViewBag.User = user;
             string currentRole = user.Roles.FirstOrDefault().RoleId;
             var userRoleName = (from role in db.Roles
                                 where role.Id == currentRole
@@ -37,6 +43,7 @@ namespace MedOffice.Controllers
             return View(user);
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(string id)
         {
             ApplicationUser user = db.Users.Find(id);
@@ -46,7 +53,9 @@ namespace MedOffice.Controllers
             return View(user);
         }
 
+
         [NonAction]
+        [Authorize(Roles = "Administrator")]
         public IEnumerable<SelectListItem> GetAllRoles()
         {
             var selectList = new List<SelectListItem>();
@@ -63,6 +72,8 @@ namespace MedOffice.Controllers
             return selectList;
         }
 
+
+        [Authorize(Roles = "Administrator")]
         [HttpPut]
         public ActionResult Edit(string id, ApplicationUser newData)
         {
@@ -87,13 +98,24 @@ namespace MedOffice.Controllers
                         UserManager.RemoveFromRole(id, role.Name);
                     }
 
-                    var selectedRole =
-                    db.Roles.Find(HttpContext.Request.Params.Get("newRole"));
+                    var selectedRole = db.Roles.Find(HttpContext.Request.Params.Get("newRole"));
 
                     UserManager.AddToRole(id, selectedRole.Name);
+
                     db.SaveChanges();
+
+                    TempData["message"] = "Utilizatorul a fost editat cu succes";
+                    return RedirectToAction("Index");
+
+
+
                 }
-                return RedirectToAction("Index");
+                else
+                {
+                    return View(newData);
+                }
+                
+
             }
             catch (Exception e)
             {

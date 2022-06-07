@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post" action="/Articles/Edit/@ViewBag.Location.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <label>Oras</label>
+    <br />
+    <input type="text" name="City" value="@ViewBag.Location.City" />
+    <br /><br />
+    <label>Adresa</label>
+    <br />
+    <input type="text" name="Address" value="@ViewBag.Location.Address" />
+    <br /><br />
+    <label>Latitudine</label>
+    <br />
+    <input type="text" name="Latitude" value="@ViewBag.Location.Latitude" />
+    <br /><br />
+    <label>Latitudine</label>
+    <br />
+    <input type="text" name="Longitudine" value="@ViewBag.Location.Longitude" />
+    <br />
+    <select name="Department">
+        @foreach (var department in ViewBag.Departments)
+        {
+            <option @{ if (department.DepartmentId == ViewBag.Department.DepartmentId) { @: selected="selected"
+                    } }
+                    value="@department.DepartmentId">
+                @department.DepartmentName
+            </option>
+        }
+    </select>
+    <br />
+    <button type="submit">Modifica Locatie</button>
+</form>

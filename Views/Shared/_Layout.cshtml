@@ -21,7 +21,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarExample01">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    
+
                     <li class="nav-item active">
                         <a class="nav-link" aria-current="page" href="/Home/Index">Acasa</a>
                     </li>
@@ -40,13 +40,28 @@
                             <a class="nav-link" href="/Users/Index">Utilizatori</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Users/Index">Locatii</a>
+                            <a class="nav-link" href="/Locations/Index">Locatii</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Users/Index">Departamente</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Users/Index">Doctori</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Doctor"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/DoctorDetails/Index">Doctori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/DoctorDetails/Edit">Editeaza Profilul</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/DoctorDetails/Show">Arata profilul</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Programari</a>
                         </li>
                     }
 
