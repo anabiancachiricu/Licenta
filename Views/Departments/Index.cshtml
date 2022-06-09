@@ -3,14 +3,20 @@
     ViewBag.Title = "Index";
 }
 
-@foreach (var department in ViewBag.DepartmentsList)
-{
-    <h2>@department.DepartmentName</h2>
-    <p>@department.DepartmentDescription</p>
 
-    <a href="/Departments/Edit/@department.DepartmentId">Editeaza departament</a>
-    <br />
+
+@if (ViewBag.DepartmentsCount != 0)
+{
+    foreach (var department in ViewBag.DepartmentsList)
+    {
+        <h2>@department.DepartmentName</h2>
+        <p>@department.DepartmentDescription</p>
+
+        <a href="/Departments/Edit/@department.DepartmentId">Editeaza departament</a>
+        <br />
+    }
 }
+
 <a href="/Locations/Index/">Afisare lista locatii </a>
 <br />
 <a href="/Departments/New">Adauga Departament</a>

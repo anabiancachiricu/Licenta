@@ -13,7 +13,7 @@ namespace MedOffice.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202206011148207_Initial"; }
+            get { return "202206081226544_Initial"; }
         }
         
         string IMigrationMetadata.Source

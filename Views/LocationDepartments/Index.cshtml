@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Idex";
+}
+
+<h2>Idex</h2>
+@if (ViewBag.LocationDepartmentsCount != 0)
+{
+    foreach (var locdep in ViewBag.LocationDepartments)
+    {
+        <h2>@locdep.LocationId</h2>
+        <p>@locdep.DepartmentId</p>
+
+        <br />
+    }
+
+}
+
+<a href="/LocationDepartments/Index/">Afisare lista locatii si departamente </a>
+<br />
+<a href="/LocationDepartments/New">Asociaza Locatie cu Departament</a>
+<br />

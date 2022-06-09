@@ -12,7 +12,7 @@ namespace MedOffice.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-      
+
         public IEnumerable<SelectListItem> AllRoles { get; set; }
 
         public string FirstName { get; set; }
@@ -23,8 +23,7 @@ namespace MedOffice.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        public virtual Department Department { get; set; }
-        public virtual Location Location { get; set; }
+        
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -46,10 +45,12 @@ namespace MedOffice.Models
         {
             return new ApplicationDbContext();
         }
-        public DbSet<DoctorDetails> Doctors { get; set; }
+        
         public DbSet<Location> Locations { get; set;}
         public DbSet<Investigation> Investigations { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<Appointment> Appointments { get; set; }
+        
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<LocationDepartment> LocationDepartments { get;  set; }
     }
 }

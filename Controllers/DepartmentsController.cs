@@ -18,7 +18,8 @@ namespace MedOffice.Controllers
         {
             var departments = from department in db.Departments
                             select department;
-            ViewBag.DepartmentsList = departments;
+            ViewBag.departmentsList = departments;
+            ViewBag.DepartmentsCount = departments.Count();
             return View();
         }
         public ActionResult New()

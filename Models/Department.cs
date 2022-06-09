@@ -18,6 +18,6 @@ namespace MedOffice.Models
         [Required]
         public string DepartmentDescription { get; set; }
 
-        //public virtual ICollection<Location> Locations { get; set; }
+        public virtual ICollection<Location> Locations { get; set; }
     }
 }

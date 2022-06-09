@@ -21,18 +21,21 @@ namespace MedOffice.Controllers
             var locations = from location in db.Locations
                         select location;
             ViewBag.LocationsList = locations;
-            string markers = "[";
-            foreach (var loc in locations)
-            {
-                markers += "{";
-                markers += string.Format("'City':'{0}',", loc.City);
-                markers += string.Format("'Adress':'{0}',", loc.Address);
-                markers += string.Format("'Latitude':'{0}',", loc.Latitude);
-                markers += string.Format("'Longitude':'{0}',", loc.Longitude);
-                markers += "}";
-            }
-            markers += "]";
-            ViewBag.Markers = markers;
+            ViewBag.LocationsCount = locations.Count();
+
+            //string markers = "[";
+            //foreach (var loc in locations)
+            //{
+            //    markers += "{";
+            //    markers += string.Format("'City':'{0}',", loc.City);
+            //    markers += string.Format("'Adress':'{0}',", loc.Address);
+            //    markers += string.Format("'Latitude':'{0}',", loc.Latitude);
+            //    markers += string.Format("'Longitude':'{0}',", loc.Longitude);
+            //    markers += "}";
+            //}
+            //markers += "]";
+            //ViewBag.Markers = markers;
+
             return View();
         }
 
@@ -51,8 +54,20 @@ namespace MedOffice.Controllers
 
         public ActionResult New()
         {
-            var departments = from dep in db.Departments select dep;
-            ViewBag.Departments = departments;
+            //List<SelectListItem> items = new List<SelectListItem>();
+
+           
+            //foreach (var dep in departments)
+            //{
+            //    items.Add(new SelectListItem
+            //    {
+            //        Text = dep.DepartmentName.ToString(),
+            //        Value=dep.DepartmentId.ToString()
+            //    });
+               
+            //}
+
+           
             return View();
         }
 
@@ -61,7 +76,18 @@ namespace MedOffice.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Locations.Add(location);
+
+                //foreach (SelectListItem item in items)
+                //{
+                //    if (item.Selected)
+                //    {
+                //        Department dep = db.Departments.Find(item.Value);
+                //        location.Departments.Add(dep);
+                //    }
+                //}
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -77,10 +103,10 @@ namespace MedOffice.Controllers
         {
             Location location = db.Locations.Find(id);
             ViewBag.Location = location;
-            ViewBag.Departments = location.Departments;
-            var departments = from dep in db.Departments select dep;
+           // ViewBag.Departments = location.Departments;
+           // var departments = (from dep in db.Departments select dep).ToList();
             
-            ViewBag.Departments = departments;
+            //ViewBag.Departments = new MultiSelectList(departments, "DepartmentId", "DepartmentName"); ;
             return View();
         }
 
@@ -96,7 +122,7 @@ namespace MedOffice.Controllers
                     location.Address = requestLocation.Address;
                     location.Latitude = requestLocation.Latitude;
                     location.Longitude = requestLocation.Longitude;
-                    location.Departments = requestLocation.Departments;
+                   // location.Departments = requestLocation.Departments;
 
                     db.SaveChanges();
                 }

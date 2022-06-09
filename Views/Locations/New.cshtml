@@ -1,4 +1,4 @@
-﻿
+﻿@model MedOffice.Models.Location
 @{
     ViewBag.Title = "New";
 }
@@ -20,15 +20,5 @@
     <input type="text" name="Longitude" />
     <br />
 
-    <label>Selectati departamentele</label>
-    <select name="DepartmentId">
-        @foreach (var department in ViewBag.Departments)
-        {
-            <option value="@department.DepartmentId">
-                @department.DepartmentName
-            </option>
-        }
-    </select>
-    <br />
     <button type="submit">Adauga Locatie</button>
 </form>

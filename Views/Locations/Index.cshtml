@@ -2,15 +2,18 @@
 @{
     ViewBag.Title = "Index";
 }
-
-@foreach (var location in ViewBag.LocationsList)
+@if (ViewBag.LocationsCount != 0)
 {
-    <h2>@location.City</h2>
-    <p>@location.Address</p>
-    <p>@location.Latitude</p>
-    <p>@location.Longitude</p>
-    <a href="/Locations/Show/@location.LocationId">Afisare Locatie</a>
+    foreach (var location in ViewBag.LocationsList)
+    {
+        <h2>@location.City</h2>
+        <p>@location.Address</p>
+        <p>@location.Latitude</p>
+        <p>@location.Longitude</p>
+        <a href="/Locations/Show/@location.LocationId">Afisare Locatie</a>
+    }
 }
+
 <a href="/Departments/Index/">Afisare lista departamente</a>
 <br />
 <a href="/Locations/New">Adauga Locatie</a>
