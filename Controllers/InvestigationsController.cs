@@ -67,5 +67,57 @@ namespace MedOffice.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Edit(int id)
+        {
+            Investigation investigation = db.Investigations.Find(id);
+            investigation.Departments = GetAllDepartments();
+            
+
+            ViewBag.InvDep = investigation.Departments.FirstOrDefault();
+            
+
+            return View(investigation);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPut]
+        public ActionResult Edit(int id, Investigation newData)
+        {
+            Investigation investigation= db.Investigations.Find(id);
+
+
+            try
+            {
+                ApplicationDbContext context = new ApplicationDbContext();
+
+                if (TryUpdateModel(investigation))
+                {
+
+                    investigation.DepartmentId = newData.DepartmentId;
+                    investigation.Price = newData.Price;
+                    investigation.Name = newData.Name;
+                    db.SaveChanges();
+
+
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    return View(newData);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Response.Write(e.Message);
+
+                return View(newData);
+            }
+        }
+
     }
+
+
 }

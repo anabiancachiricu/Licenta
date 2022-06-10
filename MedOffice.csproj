@@ -392,6 +392,7 @@
     <Content Include="Views\Doctors\Index.cshtml" />
     <Content Include="Views\Investigations\New.cshtml" />
     <Content Include="Views\Investigations\Index.cshtml" />
+    <Content Include="Views\Investigations\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
