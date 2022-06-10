@@ -79,8 +79,6 @@ namespace MedOffice.Controllers
         public ActionResult New(LocationDepartment locationDepartment)
         {
 
-            
-
             try
             {
                 db.LocationDepartments.Add(locationDepartment);

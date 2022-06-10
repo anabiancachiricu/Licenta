@@ -168,6 +168,7 @@
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvestigationsController.cs" />
     <Compile Include="Controllers\LocationDepartmentsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -389,6 +390,8 @@
     <Content Include="Views\Doctors\New.cshtml" />
     <Content Include="Views\Doctors\Edit.cshtml" />
     <Content Include="Views\Doctors\Index.cshtml" />
+    <Content Include="Views\Investigations\New.cshtml" />
+    <Content Include="Views\Investigations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

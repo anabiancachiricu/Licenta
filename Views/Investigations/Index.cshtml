@@ -1,0 +1,51 @@
+﻿@model MedOffice.Models.Investigation
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table align-middle">
+    <thead>
+        <tr>
+            
+            <th scope="col">Departament</th>
+            <th scope="col">Investigatie</th>
+            <th scope="col">Pret</th>
+            @if(User.IsInRole("Administrator"))
+            {
+                <th scope="col">Editeaza</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (IGrouping<int, MedOffice.Models.Investigation> group in ViewBag.Investigations)
+        {
+            if (ViewBag.InvestigationsCount != 0)
+            {
+                    foreach (var investigation in group)
+                    {
+                        <tr>
+                        <th scope="row">@group.Key</th>
+                        <td>@investigation.Name</td>
+                        <td>@investigation.Price</td>
+                       @if (User.IsInRole("Administrator"))
+                        {
+                            <td>
+                                <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
+                                    Edit
+                                </button>
+                            </td>
+                        }
+                        </tr>
+                        
+                    }
+
+               
+            }
+
+        }
+
+
+    </tbody>
+</table>

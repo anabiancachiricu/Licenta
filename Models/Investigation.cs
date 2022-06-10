@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MedOffice.Models
 {
@@ -18,12 +19,12 @@ namespace MedOffice.Models
         [Required]
         public float Price { get; set; }
         [Required]
+        public int DepartmentId { get; set; }
+        public IEnumerable<SelectListItem> Departments { get; set; }
         public virtual Department Department { get; set; }
 
        // public virtual ICollection<Location> Locations { get; set; }
       
-
-
 
     }
 
