@@ -1,0 +1,15 @@
+﻿@model MedOffice.Models.Doctor
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+<form method="post" action="/Doctors/New">
+
+    @Html.DropDownListFor(m => m.LocationId, new SelectList(Model.Locations, "Value", "Text"), "Selectati Locatia", new { @class = "form - control" })
+
+    @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.Departments, "Value", "Text"), "Selectati Departamentul", new { @class = "form - control" })
+    <br />
+    <button type="submit">Adauga</button>
+</form>

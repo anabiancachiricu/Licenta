@@ -1,4 +1,6 @@
 ﻿using MedOffice.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,24 +9,22 @@ using System.Web.Mvc;
 
 namespace MedOffice.Controllers
 {
-    public class LocationDepartmentsController : Controller
+    public class DoctorsController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
-        // GET: LocationDepartments
+
+        // GET: Doctors
         public ActionResult Index()
         {
-            var locdeps = from locationDepartments in db.LocationDepartments
-                              select locationDepartments;
-            var locs = from locations in db.Locations
-                            select locations;
-            var deps = from departments in db.Departments
-                              select departments;
+            var users = from user in db.Users
+                        orderby user.UserName
+                        select user;
 
-            ViewBag.LocationDepartments = locdeps;
-            ViewBag.LocationDepartmentsCount = locdeps.Count();
-            ViewBag.Locations = locs;
-            ViewBag.Departments = deps;
-
+            var docs = from doc in db.Doctors
+                       select doc;
+            ViewBag.DoctorsList = docs;
+            ViewBag.DoctorsCount = docs.Count();
+            
             return View();
         }
 
@@ -66,32 +66,55 @@ namespace MedOffice.Controllers
             return selectList;
         }
 
-        public ActionResult New()
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Edit(int id)
         {
-            LocationDepartment locationDepartment = new LocationDepartment();
-            locationDepartment.Departments = GetAllDepartments();
-            locationDepartment.Locations = GetAllLocations();
-            return View(locationDepartment);
+            Doctor doctor = db.Doctors.Find(id);
+            doctor.Departments = GetAllDepartments();
+            doctor.Locations = GetAllLocations();
+
+            ViewBag.DocDep = doctor.Departments.FirstOrDefault();
+            ViewBag.DocLoc = doctor.Locations.FirstOrDefault();
+
+            return View(doctor);
         }
 
-        [HttpPost]
-        [Authorize(Roles ="Administrator")]
-        public ActionResult New(LocationDepartment locationDepartment)
+        [Authorize(Roles = "Administrator")]
+        [HttpPut]
+        public ActionResult Edit(int id, Doctor newData)
         {
-
+            Doctor doctor = db.Doctors.Find(id);
             
-
+           
             try
             {
-                db.LocationDepartments.Add(locationDepartment);
-                db.SaveChanges();
-                TempData["message"] = "Articolul a fost adaugat!";
-                return RedirectToAction("Index");
+                ApplicationDbContext context = new ApplicationDbContext();
+              
+                if (TryUpdateModel(doctor))
+                {
+
+                    doctor.DepartmentId = newData.DepartmentId;
+                    doctor.LocationId = newData.LocationId;
+                    db.SaveChanges();
+
+
+                    return RedirectToAction("Index");
+                   
+                }
+                else
+                {
+                    return View(newData);
+                }
+
             }
             catch (Exception e)
             {
-                return View(locationDepartment);
+                Response.Write(e.Message);
+
+                return View(newData);
             }
         }
+
+
     }
 }

@@ -166,6 +166,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
+    <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationDepartmentsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -385,6 +386,9 @@
     <Content Include="Views\Departments\New.cshtml" />
     <Content Include="Views\LocationDepartments\Index.cshtml" />
     <Content Include="Views\LocationDepartments\New.cshtml" />
+    <Content Include="Views\Doctors\New.cshtml" />
+    <Content Include="Views\Doctors\Edit.cshtml" />
+    <Content Include="Views\Doctors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

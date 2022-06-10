@@ -72,6 +72,44 @@ namespace MedOffice.Controllers
             return selectList;
         }
 
+        [NonAction]
+        [Authorize(Roles = "Administrator")]
+        public IEnumerable<SelectListItem> GetAllDepartments()
+        {
+            var selectList = new List<SelectListItem>();
+            var deps = from departments in db.Departments
+                       select departments;
+            foreach (var dep in deps)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Value = dep.DepartmentId.ToString(),
+                    Text = dep.DepartmentName.ToString()
+
+                });
+            }
+            return selectList;
+        }
+
+        [NonAction]
+        [Authorize(Roles = "Administrator")]
+        public IEnumerable<SelectListItem> GetAllLocations()
+        {
+            var selectList = new List<SelectListItem>();
+            var locs = from locations in db.Locations
+                       select locations;
+            foreach (var loc in locs)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Value = loc.LocationId.ToString(),
+                    Text = loc.Address.ToString()
+
+                });
+            }
+            return selectList;
+        }
+
 
         [Authorize(Roles = "Administrator")]
         [HttpPut]
@@ -104,11 +142,26 @@ namespace MedOffice.Controllers
 
                     db.SaveChanges();
 
-                    TempData["message"] = "Utilizatorul a fost editat cu succes";
-                    return RedirectToAction("Index");
-
-
-
+                    if(selectedRole.Name=="Doctor")
+                    {
+                        Doctor doctor = new Doctor();
+                        doctor.UserId = id;
+                        doctor.Departments = GetAllDepartments();
+                        doctor.Locations = GetAllLocations();
+                        db.Doctors.Add(doctor);
+                        db.SaveChanges();
+                        var selectedDoc= from doc in db.Doctors where doc.UserId == id 
+                             select doc.DoctorId;
+                        int docId = selectedDoc.FirstOrDefault();
+                       
+                        return RedirectToAction("Edit", "Doctors", new { id=docId});
+                    }
+                    else
+                    {
+                        TempData["message"] = "Utilizatorul a fost editat cu succes";
+                        return RedirectToAction("Index");
+                    }
+                 
                 }
                 else
                 {
