@@ -2,17 +2,61 @@
 @{
     ViewBag.Title = "Index";
 }
-@if (ViewBag.LocationsCount != 0)
-{
-    foreach (var location in ViewBag.LocationsList)
-    {
-        <h2>@location.City</h2>
-        <p>@location.Address</p>
-        <p>@location.Latitude</p>
-        <p>@location.Longitude</p>
-        <a href="/Locations/Show/@location.LocationId">Afisare Locatie</a>
-    }
-}
+
+
+
+
+<h2>Index</h2>
+
+<table class="table align-middle">
+    <thead>
+        <tr>
+
+            <th scope="col">Oras</th>
+            <th scope="col">Adresa</th>
+            <th scope="col">Detalii</th>
+            @if (User.IsInRole("Administrator"))
+            {
+
+                <th scope="col">Editeaza</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (ViewBag.LocationsCount != 0)
+        {
+            foreach (var location in ViewBag.LocationsList)
+            {
+                <tr>
+                    <th scope="row">@location.City</th>
+                    <td>@location.Address</td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
+                            @Html.ActionLink("Arata", "Show", "Locations", new { id = location.LocationId }, null)
+
+                        </button>
+                    </td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+
+                        <td>
+                            <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
+                                @Html.ActionLink("Editeaza", "Edit", "Locations", new { id = location.LocationId }, null)
+
+                            </button>
+                        </td>
+                    }
+                </tr>
+
+
+
+            }
+        }
+
+
+    </tbody>
+</table>
 
 <a href="/Departments/Index/">Afisare lista departamente</a>
 <br />

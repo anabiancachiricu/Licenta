@@ -11,8 +11,8 @@
 
 
 
-<a href="/Location/Edit/@ViewBag.Location.Id">Modifica Locatie</a>
-<form method="post" action="/Locations/Delete/@ViewBag.Location.Id">
+<a href="/Location/Edit/@ViewBag.LocationId">Modifica Locatie</a>
+<form method="post" action="/Locations/Delete/@ViewBag.LocationId">
     @Html.HttpMethodOverride(HttpVerbs.Delete)
     <button type="submit">Sterge Locatie</button>
 </form>

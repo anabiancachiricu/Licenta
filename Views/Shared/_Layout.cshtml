@@ -28,10 +28,16 @@
                     @if (User.IsInRole("User"))
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="/Home/About">Despre noi</a>
+                            <a class="nav-link" href="/Locations/Index">Locatii</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Home/Contact">Contact</a>
+                            <a class="nav-link" href="/Departments/Index">Departamente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Doctors/Index">Doctori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Investigations/Index">Investigatii</a>
                         </li>
                     }
                     @if (User.IsInRole("Administrator"))
@@ -43,22 +49,26 @@
                             <a class="nav-link" href="/Locations/Index">Locatii</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Users/Index">Departamente</a>
+                            <a class="nav-link" href="/Departments/Index">Departamente</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Users/Index">Doctori</a>
+                            <a class="nav-link" href="/Doctors/Index">Doctori</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Investigations/Index">Investigatii</a>
+                        </li>
+
                     }
                     @if (User.IsInRole("Doctor"))
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="/DoctorDetails/Index">Doctori</a>
+                            <a class="nav-link" href="/Doctors/Index">Doctori</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/DoctorDetails/Edit">Editeaza Profilul</a>
+                            <a class="nav-link" href="/Doctors/Edit">Editeaza Profilul</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/DoctorDetails/Show">Arata profilul</a>
+                            <a class="nav-link" href="/Doctors/Show">Arata profilul</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Programari</a>

@@ -21,7 +21,7 @@ namespace MedOffice.Models
         public float Latitude { get; set; }
         [Required]
         public float Longitude { get; set; }
-
+      
         public virtual ICollection<Department> Departments { get; set; }
 
 

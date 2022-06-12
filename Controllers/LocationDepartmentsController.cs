@@ -13,18 +13,23 @@ namespace MedOffice.Controllers
         // GET: LocationDepartments
         public ActionResult Index()
         {
-            var locdeps = from locationDepartments in db.LocationDepartments
-                              select locationDepartments;
-            var locs = from locations in db.Locations
-                            select locations;
-            var deps = from departments in db.Departments
-                              select departments;
-
+            var locdeps =( from locationDepartments in db.LocationDepartments
+                              select locationDepartments).ToList();
+           
             ViewBag.LocationDepartments = locdeps;
             ViewBag.LocationDepartmentsCount = locdeps.Count();
-            ViewBag.Locations = locs;
-            ViewBag.Departments = deps;
 
+            IList<LocationDepartment> locDepList = new List<LocationDepartment>();
+
+            foreach(var locdep in locdeps)
+            {
+                Location loc = db.Locations.Find(locdep.LocationId);
+                Department dep = db.Departments.Find(locdep.DepartmentId);
+                locDepList.Add(new LocationDepartment { Location=loc, Department=dep});
+
+            }
+
+            ViewBag.LocDeps = locDepList;
             return View();
         }
 

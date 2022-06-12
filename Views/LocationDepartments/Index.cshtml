@@ -1,4 +1,4 @@
-﻿
+﻿@model MedOffice.Models.LocationDepartment 
 @{
     ViewBag.Title = "Idex";
 }
@@ -6,10 +6,10 @@
 <h2>Idex</h2>
 @if (ViewBag.LocationDepartmentsCount != 0)
 {
-    foreach (var locdep in ViewBag.LocationDepartments)
+    foreach (var locdep in ViewBag.LocDeps)
     {
-        <h2>@locdep.LocationId</h2>
-        <p>@locdep.DepartmentId</p>
+        <h2>@locdep.Location.Address</h2>
+        <p>@locdep.Department.DepartmentName</p>
 
         <br />
     }

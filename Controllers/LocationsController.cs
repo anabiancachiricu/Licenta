@@ -40,15 +40,11 @@ namespace MedOffice.Controllers
         }
 
 
-        public ActionResult Show(int LocationId)
+        public ActionResult Show(int id)
         {
-            Location location = db.Locations.Find(LocationId);
+            Location location = db.Locations.Find(id);
             ViewBag.Location = location;
-            ViewBag.Departments = location.Departments;
-
-            var countDepartments = location.Departments.Count();
-            ViewBag.CountDepartments = countDepartments;
-
+            
             return View();
         }
 
@@ -103,34 +99,35 @@ namespace MedOffice.Controllers
         {
             Location location = db.Locations.Find(id);
             ViewBag.Location = location;
-           // ViewBag.Departments = location.Departments;
-           // var departments = (from dep in db.Departments select dep).ToList();
-            
-            //ViewBag.Departments = new MultiSelectList(departments, "DepartmentId", "DepartmentName"); ;
-            return View();
+           
+            return View(location);
         }
 
         [HttpPut]
         public ActionResult Edit(int id, Location requestLocation)
         {
+            Location location = db.Locations.Find(id);
             try
             {
-                Location location = db.Locations.Find(id);
+                ApplicationDbContext context = new ApplicationDbContext();
+
                 if (TryUpdateModel(location))
                 {
                     location.City = requestLocation.City;
                     location.Address = requestLocation.Address;
                     location.Latitude = requestLocation.Latitude;
                     location.Longitude = requestLocation.Longitude;
-                   // location.Departments = requestLocation.Departments;
 
                     db.SaveChanges();
+
                 }
                 return RedirectToAction("Index");
+                
+                
             }
             catch (Exception e)
             {
-                return View();
+                return View(requestLocation);
             }
         }
 
