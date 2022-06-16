@@ -8,6 +8,40 @@
         public override void Up()
         {
             CreateTable(
+                "dbo.Appointments",
+                c => new
+                    {
+                        AppointmentId = c.Int(nullable: false, identity: true),
+                        DoctorId = c.Int(nullable: false),
+                        UserId = c.Int(nullable: false),
+                        Description = c.String(),
+                        DateTime = c.DateTime(nullable: false),
+                        User_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.AppointmentId)
+                .ForeignKey("dbo.Doctors", t => t.DoctorId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .Index(t => t.DoctorId)
+                .Index(t => t.User_Id);
+            
+            CreateTable(
+                "dbo.Doctors",
+                c => new
+                    {
+                        DoctorId = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
+                        DepartmentId = c.Int(nullable: false),
+                        LocationId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.DoctorId)
+                .ForeignKey("dbo.Departments", t => t.DepartmentId, cascadeDelete: true)
+                .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.DepartmentId)
+                .Index(t => t.LocationId);
+            
+            CreateTable(
                 "dbo.Departments",
                 c => new
                     {
@@ -28,23 +62,6 @@
                         Longitude = c.Single(nullable: false),
                     })
                 .PrimaryKey(t => t.LocationId);
-            
-            CreateTable(
-                "dbo.Doctors",
-                c => new
-                    {
-                        DoctorId = c.Int(nullable: false, identity: true),
-                        Department_DepartmentId = c.Int(),
-                        Location_LocationId = c.Int(),
-                        User_Id = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.DoctorId)
-                .ForeignKey("dbo.Departments", t => t.Department_DepartmentId)
-                .ForeignKey("dbo.Locations", t => t.Location_LocationId)
-                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
-                .Index(t => t.Department_DepartmentId)
-                .Index(t => t.Location_LocationId)
-                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -115,11 +132,39 @@
                         InvestigationId = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         Price = c.Single(nullable: false),
-                        Department_DepartmentId = c.Int(nullable: false),
+                        DepartmentId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.InvestigationId)
-                .ForeignKey("dbo.Departments", t => t.Department_DepartmentId, cascadeDelete: true)
-                .Index(t => t.Department_DepartmentId);
+                .ForeignKey("dbo.Departments", t => t.DepartmentId, cascadeDelete: true)
+                .Index(t => t.DepartmentId);
+            
+            CreateTable(
+                "dbo.Journals",
+                c => new
+                    {
+                        JournalId = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
+                        Description = c.String(),
+                        Simptoms = c.String(),
+                        DateTime = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.JournalId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.LocationDepartments",
+                c => new
+                    {
+                        LocDepId = c.Int(nullable: false, identity: true),
+                        LocationId = c.Int(nullable: false),
+                        DepartmentId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.LocDepId)
+                .ForeignKey("dbo.Departments", t => t.DepartmentId, cascadeDelete: true)
+                .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
+                .Index(t => t.LocationId)
+                .Index(t => t.DepartmentId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -132,7 +177,7 @@
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
-                "dbo.LocationDepartments",
+                "dbo.LocationDepartment1",
                 c => new
                     {
                         Location_LocationId = c.Int(nullable: false),
@@ -149,37 +194,50 @@
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Investigations", "Department_DepartmentId", "dbo.Departments");
-            DropForeignKey("dbo.Doctors", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.LocationDepartments", "LocationId", "dbo.Locations");
+            DropForeignKey("dbo.LocationDepartments", "DepartmentId", "dbo.Departments");
+            DropForeignKey("dbo.Journals", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Investigations", "DepartmentId", "dbo.Departments");
+            DropForeignKey("dbo.Appointments", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Appointments", "DoctorId", "dbo.Doctors");
+            DropForeignKey("dbo.Doctors", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Doctors", "Location_LocationId", "dbo.Locations");
-            DropForeignKey("dbo.Doctors", "Department_DepartmentId", "dbo.Departments");
-            DropForeignKey("dbo.LocationDepartments", "Department_DepartmentId", "dbo.Departments");
-            DropForeignKey("dbo.LocationDepartments", "Location_LocationId", "dbo.Locations");
-            DropIndex("dbo.LocationDepartments", new[] { "Department_DepartmentId" });
-            DropIndex("dbo.LocationDepartments", new[] { "Location_LocationId" });
+            DropForeignKey("dbo.Doctors", "LocationId", "dbo.Locations");
+            DropForeignKey("dbo.Doctors", "DepartmentId", "dbo.Departments");
+            DropForeignKey("dbo.LocationDepartment1", "Department_DepartmentId", "dbo.Departments");
+            DropForeignKey("dbo.LocationDepartment1", "Location_LocationId", "dbo.Locations");
+            DropIndex("dbo.LocationDepartment1", new[] { "Department_DepartmentId" });
+            DropIndex("dbo.LocationDepartment1", new[] { "Location_LocationId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Investigations", new[] { "Department_DepartmentId" });
+            DropIndex("dbo.LocationDepartments", new[] { "DepartmentId" });
+            DropIndex("dbo.LocationDepartments", new[] { "LocationId" });
+            DropIndex("dbo.Journals", new[] { "UserId" });
+            DropIndex("dbo.Investigations", new[] { "DepartmentId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Doctors", new[] { "User_Id" });
-            DropIndex("dbo.Doctors", new[] { "Location_LocationId" });
-            DropIndex("dbo.Doctors", new[] { "Department_DepartmentId" });
-            DropTable("dbo.LocationDepartments");
+            DropIndex("dbo.Doctors", new[] { "LocationId" });
+            DropIndex("dbo.Doctors", new[] { "DepartmentId" });
+            DropIndex("dbo.Doctors", new[] { "UserId" });
+            DropIndex("dbo.Appointments", new[] { "User_Id" });
+            DropIndex("dbo.Appointments", new[] { "DoctorId" });
+            DropTable("dbo.LocationDepartment1");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.LocationDepartments");
+            DropTable("dbo.Journals");
             DropTable("dbo.Investigations");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Doctors");
             DropTable("dbo.Locations");
             DropTable("dbo.Departments");
+            DropTable("dbo.Doctors");
+            DropTable("dbo.Appointments");
         }
     }
 }

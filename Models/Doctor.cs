@@ -15,8 +15,8 @@ namespace MedOffice.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DoctorId { get; set; }
         public string UserId { get; set; }
-        public string DepartmentId { get; set; }
-        public string LocationId { get; set; }
+        public int DepartmentId { get; set; }
+        public int LocationId { get; set; }
 
         public IEnumerable<SelectListItem> Departments { get; set; }
         public IEnumerable<SelectListItem> Locations { get; set; }

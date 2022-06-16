@@ -59,8 +59,7 @@
                                         <div class="form-group">
                                             <i class="glyphicon glyphicon-th-list"></i>
                                             <label>Selectati rolul</label>
-                                            @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text",
-                     ViewBag.userRole), null, new { @class = "form-control" })
+                                            @Html.DropDownList("newRole", new SelectList(@Model.AllRoles, "Value", "Text", ViewBag.userRole), null, new { @class = "form-control" })
                                         </div>
                                         <br />     
                                         

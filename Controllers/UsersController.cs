@@ -22,6 +22,7 @@ namespace MedOffice.Controllers
                         orderby user.UserName
                         select user;
             ViewBag.UsersList = users;
+
             return View();
         }
 
@@ -144,17 +145,23 @@ namespace MedOffice.Controllers
 
                     if(selectedRole.Name=="Doctor")
                     {
-                        Doctor doctor = new Doctor();
-                        doctor.UserId = id;
-                        doctor.Departments = GetAllDepartments();
-                        doctor.Locations = GetAllLocations();
-                        db.Doctors.Add(doctor);
-                        db.SaveChanges();
-                        var selectedDoc= from doc in db.Doctors where doc.UserId == id 
-                             select doc.DoctorId;
-                        int docId = selectedDoc.FirstOrDefault();
-                       
-                        return RedirectToAction("Edit", "Doctors", new { id=docId});
+                        //Doctor doctor = new Doctor();
+                        //doctor.UserId = id;
+                        //doctor.Departments = GetAllDepartments();
+                        //doctor.Locations = GetAllLocations();
+                        //doctor.User = user;
+                        //Console.WriteLine("doctor nou");
+                        //db.Doctors.Add(doctor);
+                        //Console.WriteLine("adaugat in baza");
+                        //db.SaveChanges();
+                        //Console.WriteLine("baza salvata");
+                        //var selectedDoc= from doc in db.Doctors where doc.UserId == id 
+                        //     select doc.DoctorId;
+                        //int docId = selectedDoc.FirstOrDefault();
+                        //Console.WriteLine(docId);
+                        ViewBag.user = id;
+                        ViewBag.appUser = user;
+                        return RedirectToAction("New", "Doctors");
                     }
                     else
                     {

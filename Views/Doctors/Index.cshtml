@@ -7,10 +7,10 @@
 
 @if (ViewBag.DoctorsCount != 0)
 {
-    foreach (var locdep in ViewBag.DoctorsList)
+    foreach (var doc in ViewBag.docs)
     {
-        <h2>@locdep.LocationId</h2>
-        <p>@locdep.DepartmentId</p>
+        <p>@doc.LocationId</p>
+        <p>@doc.DepartmentId</p>
 
         <br />
     }

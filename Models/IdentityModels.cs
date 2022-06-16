@@ -13,17 +13,14 @@ namespace MedOffice.Models
     public class ApplicationUser : IdentityUser
     {
 
-        public IEnumerable<SelectListItem> AllRoles { get; set; }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public byte[] UserPhoto { get; set; }
 
-
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        
+        public IEnumerable<SelectListItem> AllRoles { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -49,7 +46,8 @@ namespace MedOffice.Models
         public DbSet<Location> Locations { get; set;}
         public DbSet<Investigation> Investigations { get; set; }
         public DbSet<Department> Departments { get; set; }
-        
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Journal> Journals { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<LocationDepartment> LocationDepartments { get;  set; }
     }

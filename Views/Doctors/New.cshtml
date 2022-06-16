@@ -3,13 +3,63 @@
     ViewBag.Title = "New";
 }
 
-<h2>New</h2>
 
-<form method="post" action="/Doctors/New">
+<body style="background-color: #eee;">
 
-    @Html.DropDownListFor(m => m.LocationId, new SelectList(Model.Locations, "Value", "Text"), "Selectati Locatia", new { @class = "form - control" })
+    <section class="vh-100">
+        <div class="container h-100 align-content-center align-items-center">
 
-    @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.Departments, "Value", "Text"), "Selectati Departamentul", new { @class = "form - control" })
-    <br />
-    <button type="submit">Adauga</button>
-</form>
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black align-content-center align-items-center" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Adaugare doctor </p>
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    @using (Html.BeginForm(actionName: "New", controllerName: "Doctors"))
+                                    {
+                                       
+
+
+                                        @Html.DropDownListFor(m => m.LocationId, new SelectList(Model.Locations, "Value", "Text"), "Selectati Locatia", new { @class = "form - control" })
+                                        <br />
+
+                                        @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.Departments, "Value", "Text"), "Selectati Departamentul", new { @class = "form - control" })
+                                        <br />
+
+                                        <div class="form-group">
+                                            <div class="row mb-4">
+                                                <div class="col d-flex justify-content-center">
+
+                                                    <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                        <button class="btn btn-sm btn-success" type="submit">
+                                                            Modifica datele
+                                                            doctorului
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img src="https://cdn.dribbble.com/users/1044993/screenshots/11221617/media/1c8967ae3d3ef8bc872b5271367a07f0.png?compress=1&resize=400x300&vertical=top"
+                                         class="img-fluid" alt="Sample image" />
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</body>

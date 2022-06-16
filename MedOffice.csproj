@@ -169,6 +169,7 @@
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvestigationsController.cs" />
+    <Compile Include="Controllers\JournalsController.cs" />
     <Compile Include="Controllers\LocationDepartmentsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -176,9 +177,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206081226544_Initial.cs" />
-    <Compile Include="Migrations\202206081226544_Initial.designer.cs">
-      <DependentUpon>202206081226544_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202206161348354_Initial.cs" />
+    <Compile Include="Migrations\202206161348354_Initial.designer.cs">
+      <DependentUpon>202206161348354_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Investigation.cs" />
+    <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationDepartment.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -394,6 +396,8 @@
     <Content Include="Views\Investigations\New.cshtml" />
     <Content Include="Views\Investigations\Index.cshtml" />
     <Content Include="Views\Investigations\Edit.cshtml" />
+    <Content Include="Views\Journals\Index.cshtml" />
+    <Content Include="Views\Journals\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -404,8 +408,8 @@
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206081226544_Initial.resx">
-      <DependentUpon>202206081226544_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206161348354_Initial.resx">
+      <DependentUpon>202206161348354_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,7 +9,14 @@
     foreach (var locdep in ViewBag.LocDeps)
     {
         <h2>@locdep.Location.Address</h2>
-        <p>@locdep.Department.DepartmentName</p>
+        foreach(var locdep2 in ViewBag.Locdeps)
+        {
+            if (locdep.Location == locdep2.Location)
+            {
+                <p>@locdep2.Department.DepartmentName</p>
+            }
+        }
+
 
         <br />
     }

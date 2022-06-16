@@ -16,15 +16,22 @@ namespace MedOffice.Controllers
         // GET: Doctors
         public ActionResult Index()
         {
-            var users = from user in db.Users
-                        orderby user.UserName
-                        select user;
-
-            var docs = from doc in db.Doctors
-                       select doc;
+            var docs = (from doc in db.Doctors
+                       select doc).ToList();
             ViewBag.DoctorsList = docs;
             ViewBag.DoctorsCount = docs.Count();
-            
+
+            IList<Doctor> DocsList = new List<Doctor>();
+
+            foreach (var doc  in docs)
+            {
+                Location loc = db.Locations.Find(doc.LocationId);
+                Department dep = db.Departments.Find(doc.DepartmentId);
+                ApplicationUser us = db.Users.Find(doc.UserId);
+                DocsList.Add(new Doctor { Location = loc, Department = dep , User=us});
+
+            }
+            ViewBag.docs = DocsList;
             return View();
         }
 
@@ -65,6 +72,38 @@ namespace MedOffice.Controllers
             }
             return selectList;
         }
+
+        public ActionResult New()
+        {
+            Doctor doctor = new Doctor();
+            doctor.Departments = GetAllDepartments();
+            doctor.Locations = GetAllLocations();
+            doctor.UserId = ViewBag.user;
+            doctor.User = ViewBag.appUser;
+            return View(doctor);
+        }
+
+        [HttpPost]
+        public ActionResult New(Doctor doctor)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                db.Doctors.Add(doctor);
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["message"] = "Doctorul nu a fost adaugat";
+                return View(doctor);
+            }
+        }
+
+
+
 
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
