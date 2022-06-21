@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using MedOffice.Models;
+using GoogleMaps.LocationServices;
 
 namespace MedOffice.Controllers
 {
@@ -44,8 +45,21 @@ namespace MedOffice.Controllers
         {
             Location location = db.Locations.Find(id);
             ViewBag.Location = location;
-            
+            //ViewBag.Latitude = Math.Truncate(location.Latitude).ToString() +"."+(location.Latitude - Math.Truncate(location.Latitude)).ToString();
+            //ViewBag.Longitude = Math.Truncate(location.Longitude).ToString() + "." + (location.Longitude - Math.Truncate(location.Longitude)).ToString(); 
+            //return View();
+
+
+            var locationService = new GoogleLocationService("AIzaSyAGiM9eKTPSUqdPUGJQUIQS7b4A9pmGCvw");
+            var point = locationService.GetLatLongFromAddress(location.Address);
+
+            var latitude = point.Latitude;
+            var longitude = point.Longitude;
+
+            ViewBag.Latitude = latitude;
+            ViewBag.Longitude = longitude;
             return View();
+
         }
 
         public ActionResult New()
@@ -68,6 +82,7 @@ namespace MedOffice.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult New(Location location)
         {
             if (ModelState.IsValid)
@@ -104,6 +119,7 @@ namespace MedOffice.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles ="Administrator")]
         public ActionResult Edit(int id, Location requestLocation)
         {
             Location location = db.Locations.Find(id);

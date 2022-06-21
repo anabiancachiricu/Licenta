@@ -3,7 +3,6 @@
     ViewBag.Title = "Show";
 }
 
-<h2>Show</h2>
 
 <h1>Afisare Locatie</h1>
 <h2>@ViewBag.Location.City</h2>
@@ -11,7 +10,7 @@
 
 
 
-<a href="/Location/Edit/@ViewBag.LocationId">Modifica Locatie</a>
+<a href="/Locations/Edit/@ViewBag.Location.LocationId">Modifica Locatie</a>
 <form method="post" action="/Locations/Delete/@ViewBag.LocationId">
     @Html.HttpMethodOverride(HttpVerbs.Delete)
     <button type="submit">Sterge Locatie</button>
@@ -21,3 +20,23 @@
 <br />
 <a href="/Locations/New">Adauga locatie</a>
 
+<fieldset>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div id="googleMap" style="height:400px;width:100%;"></div>
+    <script>
+
+        function myMap() {
+            var myCenter = new google.maps.LatLng(@ViewBag.Latitude, @ViewBag.Longitude);
+            var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var marker = new google.maps.Marker({ position: myCenter });
+            marker.setMap(map);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGiM9eKTPSUqdPUGJQUIQS7b4A9pmGCvw&callback=myMap"></script>
+</fieldset>

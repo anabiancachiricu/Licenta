@@ -3,21 +3,59 @@
     ViewBag.Title = "Index";
 }
 
+<body style="background-color: #eee">
 
+    <section class="vh-100">
+        <div class="container h-100 align-content-center align-items-center" style="border-radius: 15px;">
+            <br />
+            <br />
+            
+            
 
-@if (ViewBag.DepartmentsCount != 0)
-{
-    foreach (var department in ViewBag.DepartmentsList)
-    {
-        <h2>@department.DepartmentName</h2>
-        <p>@department.DepartmentDescription</p>
+            <ul class="list-group list-group-light align-content-center align-items-center " style="border-radius: 15px;">
 
-        <a href="/Departments/Edit/@department.DepartmentId">Editeaza departament</a>
-        <br />
-    }
-}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    
+                    <div class="row align-content-center align-items-center">
 
-<a href="/Locations/Index/">Afisare lista locatii </a>
-<br />
-<a href="/Departments/New">Adauga Departament</a>
-<br />
+                        <h3 class="text-center">Afisare departamente</h3>
+                        <br />
+                        <br />
+                        @if (ViewBag.DepartmentsCount != 0)
+                        {
+                            foreach (var department in ViewBag.DepartmentsList)
+                            {
+                                <div class="col-xl-6 col-lg-4  mb-4 ">
+                                    <div class="card">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">@department.DepartmentName</h5>
+                                            <p class="card-text">@department.DepartmentDescription</p>
+
+                                        </div>
+                                        @if (User.IsInRole("Administrator"))
+                                        {
+                                            <div class="card-footer align-content-center">
+                                                <a href="/Departments/Edit/@department.DepartmentId">Editeaza departament</a>
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                </div>
+                            }
+                        }
+                        <div class="align-content-center align-items-center text-center">
+                            <a href="/Locations/Index/">Afisare lista locatii </a>
+                            <br />
+                            <a href="/Departments/New">Adauga Departament</a>
+                            <br />
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+</body>

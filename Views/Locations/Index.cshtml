@@ -3,12 +3,11 @@
     ViewBag.Title = "Index";
 }
 
+<br />
+<br />
+<br />
 
-
-
-<h2>Index</h2>
-
-<table class="table align-middle">
+<table class="table align-middle table-striped">
     <thead>
         <tr>
 
@@ -32,17 +31,17 @@
                     <th scope="row">@location.City</th>
                     <td>@location.Address</td>
                     <td>
-                        <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
-                            @Html.ActionLink("Arata", "Show", "Locations", new { id = location.LocationId }, null)
 
-                        </button>
+          
+                            @Html.ActionLink("Arata", "Show", "Locations", new { id = location.LocationId }, new { @class = "btn btn - link btn - sm px - 3 btn-outline-dark" })
+                        
                     </td>
                     @if (User.IsInRole("Administrator"))
                     {
 
                         <td>
                             <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
-                                @Html.ActionLink("Editeaza", "Edit", "Locations", new { id = location.LocationId }, null)
+                                @Html.ActionLink("Editeaza", "Edit", "Locations", new { id = location.LocationId }, new { @class = "btn btn - link btn - sm px - 3 btn-outline-dark" })
 
                             </button>
                         </td>
@@ -58,7 +57,21 @@
     </tbody>
 </table>
 
-<a href="/Departments/Index/">Afisare lista departamente</a>
-<br />
-<a href="/Locations/New">Adauga Locatie</a>
-<br />
+<span>
+    <a href="/Departments/Index/">
+        <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+            Afisare lista departamente
+        </button>
+    </a>
+</span>
+@if (User.IsInRole("Administrator"))
+{
+    <span>
+        <a href="/Locations/New">
+            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                Adauga locatie
+            </button>
+        </a>
+    </span>
+}
+

@@ -59,11 +59,11 @@ namespace MedOffice
                 appId: "999184060732930",
                 appSecret: "e92da79a3c4c01991ae8eb5e4980dfc8");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "228098170474-oq75n7kreshd2j0ko1p4am3ng0t1c5t7.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
         }
     }
 }
