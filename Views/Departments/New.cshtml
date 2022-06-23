@@ -1,14 +1,79 @@
-﻿@{
+﻿@model MedOffice.Models.Department
+@{
     ViewBag.Title = "New";
 }
-<h2>New</h2>
-<form method="post" action="/Departments/New">
-    <label>Nume</label>
-    <input type="text" name="DepartmentName" />
-    <br />
-    <label>Descriere</label>
-    <textarea  name="DepartmentDescription" ></textarea>
 
-    <br />
-    <button type="submit">Adauga Departament</button>
-</form>
+
+
+<body style="background-color: #eee;">
+
+    <section class="vh-100">
+        <div class="container h-100 align-content-center align-items-center">
+
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black align-content-center align-items-center" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Adaugare Departament</p>
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    @using (Html.BeginForm(actionName: "New", controllerName: "Departments"))
+                                    {
+
+                                        <div class="form-group">
+
+                                            @Html.Label("DepartmentName", "Nume departament", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                @Html.TextBoxFor(m => m.DepartmentName, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            @Html.Label("DepartmentDescription", "Descriere departament", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                @Html.TextAreaFor(m => m.DepartmentDescription, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="row mb-4">
+                                                <div class="col d-flex justify-content-center">
+
+                                                    <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                        <button class="btn btn-sm btn-success" type="submit">
+                                                            Adauga Departament
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img src="https://media.istockphoto.com/vectors/medical-concept-with-hospital-building-in-flat-style-isolated-on-vector-id949240222?k=20&m=949240222&s=612x612&w=0&h=uLhGPsSf8oWIARXUOtWL90txfvhZYlTl3SZKrATOI6w="
+                                         class="img-fluid" alt="Sample image" />
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</body>
+

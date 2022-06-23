@@ -15,11 +15,11 @@ namespace MedOffice.Controllers
         // GET: Investigations
         public ActionResult Index()
         {
-            var investigations = from inv in db.Investigations
+            var investigations = (from inv in db.Investigations.Include("Department")
                                  group inv by inv.DepartmentId into invGroup
                                  where invGroup.Count()>=1
                                  orderby invGroup.Key 
-                                 select invGroup;
+                                 select invGroup).ToList();
             ViewBag.Investigations = investigations;
             ViewBag.InvestigationsCount = investigations.Count();
             return View();

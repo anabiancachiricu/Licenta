@@ -3,16 +3,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<table class="table align-middle">
+<br />
+<br />
+<table class="table table-striped align-middle align-content-center">
     <thead>
         <tr>
-            
+
             <th scope="col">Departament</th>
             <th scope="col">Investigatie</th>
             <th scope="col">Pret</th>
-            @if(User.IsInRole("Administrator"))
+            @if (User.IsInRole("Administrator"))
             {
                 <th scope="col">Editeaza</th>
             }
@@ -23,30 +23,45 @@
         {
             if (ViewBag.InvestigationsCount != 0)
             {
-                    foreach (var investigation in group)
-                    {
-                        <tr>
-                        <th scope="row">@group.Key</th>
+                foreach (var investigation in group)
+                {
+                    <tr>
+                        
+                        <td>@investigation.Department.DepartmentName</td>
                         <td>@investigation.Name</td>
                         <td>@investigation.Price</td>
-                       @if (User.IsInRole("Administrator"))
+                        @if (User.IsInRole("Administrator"))
                         {
                             <td>
                                 <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
-                                    @Html.ActionLink("Editeaza", "Edit", "Investigations", new { id=investigation.InvestigationId }, null)
-                                   
+                                    @Html.ActionLink("Editeaza", "Edit", "Investigations", new { id = investigation.InvestigationId }, new { @class = "btn btn - link btn - sm px - 3 btn-outline-dark" })
+
                                 </button>
                             </td>
                         }
-                        </tr>
-                        
-                    }
+                    </tr>
 
-               
+                }
+
+
             }
 
         }
 
 
     </tbody>
+
+
 </table>
+<div class="align-content-center align-items-center text-center">
+    @if (User.IsInRole("Administrator"))
+    {
+        <a href="/Investigations/New">
+            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                Adauga investigatie
+            </button>
+
+        </a>
+        <br />
+    }
+</div>

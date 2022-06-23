@@ -28,6 +28,7 @@ namespace MedOffice.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles ="Administrator")]
         public ActionResult New(Department department)
         {
             if (ModelState.IsValid)
@@ -47,10 +48,11 @@ namespace MedOffice.Controllers
         {
             Department department = db.Departments.Find(id);
             ViewBag.Department = department;
-            return View();
+            return View(department);
         }
 
         [HttpPut]
+        [Authorize(Roles ="Administrator")]
         public ActionResult Edit(int id, Department requestDepartment)
         {
             try

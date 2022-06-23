@@ -9,17 +9,24 @@
 <p>@ViewBag.Location.Address</p>
 
 
+@if (User.IsInRole("Administrator"))
+{
+    <a href="/Locations/Edit/@ViewBag.Location.LocationId">Modifica Locatie</a>
+    <form method="post" action="/Locations/Delete/@ViewBag.LocationId">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button type="submit">Sterge Locatie</button>
+    </form>
+    <hr />
+    <a href="/Locations/New">Adauga locatie</a>
 
-<a href="/Locations/Edit/@ViewBag.Location.LocationId">Modifica Locatie</a>
-<form method="post" action="/Locations/Delete/@ViewBag.LocationId">
-    @Html.HttpMethodOverride(HttpVerbs.Delete)
-    <button type="submit">Sterge Locatie</button>
-</form>
-<hr />
+}
+
 <a href="/Locations/Index">Inapoi la locatii</a>
 <br />
-<a href="/Locations/New">Adauga locatie</a>
-
+<br />
+<br />
+<p>@ViewBag.Latitude</p>
+<p>@ViewBag.Longitude</p>
 <fieldset>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +39,7 @@
 
         function myMap() {
             var myCenter = new google.maps.LatLng(@ViewBag.Latitude, @ViewBag.Longitude);
-            var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+           var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
             var marker = new google.maps.Marker({ position: myCenter });
             marker.setMap(map);

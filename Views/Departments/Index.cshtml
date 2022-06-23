@@ -35,8 +35,12 @@
                                         </div>
                                         @if (User.IsInRole("Administrator"))
                                         {
-                                            <div class="card-footer align-content-center">
-                                                <a href="/Departments/Edit/@department.DepartmentId">Editeaza departament</a>
+                                            <div class="card-footer align-content-center align-items-center justify-content-center">
+                                                <a href="/Departments/Edit/@department.DepartmentId">
+                                                            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                                                Editeaza departament
+                                                            </button>
+                                                </a>
                                             </div>
                                         }
 
@@ -45,12 +49,27 @@
                                 </div>
                             }
                         }
-                        <div class="align-content-center align-items-center text-center">
-                            <a href="/Locations/Index/">Afisare lista locatii </a>
+                    <div class="align-content-center align-items-center text-center">
+                        <a href="/Locations/Index/">
+                            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                Afiseaza lista locatii
+                            </button>
+                        </a>
+                        <br />
+                        <br />
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a href="/Departments/New">
+                                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                    Adauga departament
+                                </button>
+                            </a>
                             <br />
-                            <a href="/Departments/New">Adauga Departament</a>
-                            <br />
-                        </div>
+
+                        }
+
+                        <br />
+                    </div>
                     </div>
                 </li>
 

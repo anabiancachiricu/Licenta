@@ -53,11 +53,12 @@ namespace MedOffice.Controllers
             var locationService = new GoogleLocationService("AIzaSyAGiM9eKTPSUqdPUGJQUIQS7b4A9pmGCvw");
             var point = locationService.GetLatLongFromAddress(location.Address);
 
-            var latitude = point.Latitude;
-            var longitude = point.Longitude;
+            location.Latitude = point.Latitude;
+            location.Longitude = point.Longitude;
 
-            ViewBag.Latitude = latitude;
-            ViewBag.Longitude = longitude;
+            ViewBag.Latitude = location.Latitude;
+            ViewBag.Longitude = location.Longitude;
+            
             return View();
 
         }

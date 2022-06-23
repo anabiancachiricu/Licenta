@@ -15,10 +15,13 @@ namespace MedOffice.Controllers
         {
             var locdeps =( from locationDepartments in db.LocationDepartments
                               select locationDepartments).ToList();
-           
+            var search = "";
+
             ViewBag.LocationDepartments = locdeps;
             ViewBag.LocationDepartmentsCount = locdeps.Count();
 
+            var locss = (from locs in db.Locations select locs).ToList();
+            ViewBag.locs = locss;
             IList<LocationDepartment> locDepList = new List<LocationDepartment>();
 
             foreach(var locdep in locdeps)
@@ -30,6 +33,17 @@ namespace MedOffice.Controllers
             }
 
             ViewBag.LocDeps = locDepList;
+
+            if(Request.Params.Get("search")!=null)
+            {
+                search = Request.Params.Get("search").Trim();
+                List<int> LocDepIds = db.LocationDepartments.Where(
+                    ld => ld.Department.DepartmentName.Contains(search) 
+                    || ld.Location.Address.Contains(search))
+                    .Select(ld => ld.LocDepId).ToList();
+            }
+
+
             return View();
         }
 
@@ -86,10 +100,30 @@ namespace MedOffice.Controllers
 
             try
             {
-                db.LocationDepartments.Add(locationDepartment);
-                db.SaveChanges();
-                TempData["message"] = "Articolul a fost adaugat!";
-                return RedirectToAction("Index");
+
+                var exist = from locDep in db.LocationDepartments
+                            where locDep.DepartmentId == locationDepartment.DepartmentId
+                            && locDep.LocationId == locationDepartment.LocationId
+                            select locDep;
+
+
+                if (exist.Count()==0)
+                {
+                    db.LocationDepartments.Add(locationDepartment);
+                    db.SaveChanges();
+                    TempData["message"] = "Combinatia a fost adaugata!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    TempData["message"] = "Combinatia exista deja!";
+                    return RedirectToAction("Index");
+                    
+                }
+
+               
+
             }
             catch (Exception e)
             {

@@ -11,14 +11,19 @@
 <p>@ViewBag.Department.DepartmentDescription</p>
 
 
+@if (User.IsInRole("Administrator"))
+{
+    <a href="/Department/Edit/@ViewBag.Department.DepartmentId">Modifica Departament</a>
+    <form method="post" action="/Department/Delete/@ViewBag.Department.DepartmentId">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button type="submit">Sterge Departament</button>
+    </form>
+    <hr />
+    <a href="/Departments/New">Adauga departament</a>
+}
 
-<a href="/Department/Edit/@ViewBag.Department.DepartmentId">Modifica Departament</a>
-<form method="post" action="/Department/Delete/@ViewBag.Department.DepartmentId">
-    @Html.HttpMethodOverride(HttpVerbs.Delete)
-    <button type="submit">Sterge Departament</button>
-</form>
-<hr />
 <a href="/Departments/Index">Inapoi la departamente</a>
 <br />
-<a href="/Departments/New">Adauga departament</a>
+
+
 

@@ -16,7 +16,7 @@ namespace MedOffice.Controllers
         // GET: Doctors
         public ActionResult Index()
         {
-            var docs = (from doc in db.Doctors
+            var docs = (from doc in db.Doctors.Include("Department").Include("Location").Include("User")
                        select doc).ToList();
             ViewBag.DoctorsList = docs;
             ViewBag.DoctorsCount = docs.Count();

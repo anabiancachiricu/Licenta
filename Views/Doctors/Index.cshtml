@@ -3,21 +3,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2> Lista doctori</h2>
 
 @if (ViewBag.DoctorsCount != 0)
 {
-    foreach (var doc in ViewBag.docs)
+    foreach (var doc in ViewBag.DoctorsList)
     {
-        <p>@doc.LocationId</p>
-        <p>@doc.DepartmentId</p>
+        <h2>@doc.User.UserName</h2>
+        <h3>@doc.User.FirstName</h3>
+        <h3>@doc.User.LastName</h3>
+        <img src="@doc.User.UserPhoto" height="96" width="96" />
+        <p>@doc.Location.Address</p>
+        <p>@doc.Department.DepartmentName</p>
 
         <br />
     }
 
 }
 
+@if (User.IsInRole("Administrator"))
+{
+    <a href="/LocationDepartments/New">Asociaza Locatie cu Departament</a>
+    <br />
+}
 <a href="/LocationDepartments/Index/">Afisare lista locatii si departamente </a>
-<br />
-<a href="/LocationDepartments/New">Asociaza Locatie cu Departament</a>
 <br />

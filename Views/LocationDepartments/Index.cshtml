@@ -8,7 +8,7 @@
         <br />
         <br />
         <div class="input-group rounded d-flex flex-row-reverse">
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <input type="text" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" value="@ViewBag.SearchString" />
             <span class="input-group-text border-0" id="search-addon">
                 <i class="fas fa-search"></i>
             </span>
@@ -20,16 +20,16 @@
 
                 @if (ViewBag.LocationDepartmentsCount != 0)
                 {
-                    foreach (var locdep in ViewBag.LocDeps)
+                    foreach (var loc in ViewBag.locs)
                     {
-                        <h2>@locdep.Location.Address</h2>
+                        <h2>@loc.Address</h2>
                         <ul class="list-group">
-                            @foreach (var locdep2 in ViewBag.Locdeps)
+                            @foreach (var locdep in ViewBag.Locdeps)
                             {
 
-                                if (locdep.Location == locdep2.Location)
+                                if (locdep.Location == loc)
                                 {
-                                    <li class="list-group-item">@locdep2.Department.DepartmentName</li>
+                                    <li class="list-group-item">@locdep.Department.DepartmentName</li>
                                 }
                             }
                         </ul>
@@ -42,10 +42,23 @@
 
 
 
-                <a href="/LocationDepartments/Index/">Afisare lista locatii si departamente </a>
+                <a href="/LocationDepartments/Index/">
+                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                        Afisare lista locatii si departamente
+                    </button>
+                </a>
                 <br />
-                <a href="/LocationDepartments/New">Asociaza Locatie cu Departament</a>
-                <br />
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a href="/LocationDepartments/New">
+                        <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                            Asociaza locatie si departament
+                        </button>
+
+                    </a>
+                    <br />
+                }
+
             </ul>
         </div>
     </section>
