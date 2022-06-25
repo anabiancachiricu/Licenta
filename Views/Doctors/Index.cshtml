@@ -3,28 +3,97 @@
     ViewBag.Title = "Index";
 }
 
-<h2> Lista doctori</h2>
 
-@if (ViewBag.DoctorsCount != 0)
-{
-    foreach (var doc in ViewBag.DoctorsList)
-    {
-        <h2>@doc.User.UserName</h2>
-        <h3>@doc.User.FirstName</h3>
-        <h3>@doc.User.LastName</h3>
-        <img src="@doc.User.UserPhoto" height="96" width="96" />
-        <p>@doc.Location.Address</p>
-        <p>@doc.Department.DepartmentName</p>
+<body style="background-color:#eee" class="align-items-center align-content-center">
 
-        <br />
-    }
+    <section class="vh-100">
+        <div class="container h-100 align-content-center justify-content-between align-items-center" style="border-radius: 15px;">
+            <br />
+            <br />
+            <h3 class="text-center">Afisare doctori</h3>
+            <br />
+            <br />
 
-}
+            <ul class="list-group list-group-light align-content-center align-items-center " style="border-radius: 15px;">
 
-@if (User.IsInRole("Administrator"))
-{
-    <a href="/LocationDepartments/New">Asociaza Locatie cu Departament</a>
-    <br />
-}
-<a href="/LocationDepartments/Index/">Afisare lista locatii si departamente </a>
-<br />
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                    <div class="row align-content-center align-items-center">
+
+
+                        @if (ViewBag.DoctorsCount != 0)
+                        {
+                            foreach (var doc in ViewBag.DoctorsList)
+                            {
+                                <div class="col-xl-6 col-lg-4  mb-4 ">
+
+                                    <div class="card ">
+
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="@Url.Action("DoctorPhoto", "Doctors", new { docId=doc.DoctorId })"
+                                                     alt="Doctors' profile picture"
+                                                     class="img-fluid rounded-start"
+                                                     style="height:200px" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <span>
+                                                        <h5 class="card-title">@doc.User.FirstName </h5>
+                                                        <h5 class="card-title">@doc.User.LastName</h5>
+                                                    </span>
+                                                    <p class="card-text">@doc.Department.DepartmentName</p>
+                                                    <p class="card-text">@doc.Location.Address</p>
+
+                                                    <p class="card-text">
+                                                        <small class="text-muted">@doc.User.PhoneNumber</small>
+                                                        <small class="text-muted">@doc.User.Email</small>
+                                                    </p>
+                                                </div>
+                                                <div class="card-footer text-center align-content-center align-items-center">
+                                                    <a href="/Doctors/Show/@doc.DoctorId">
+                                                        <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                                            Vezi detalii
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <br />
+                            }
+
+                        }
+
+                    <div class="text-center align-content-center align-items-center justify-content-center"
+                         @if (User.IsInRole("Administrator")) 
+                         { 
+                             <a href="/LocationDepartments/New">
+                                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                    Asociaza locatie si departament
+                                </button>
+                            </a>
+                            <br />
+                         }
+
+                        <a href="/LocationDepartments/Index/">
+                            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                Afisare lista locatii si departamente
+                            </button>
+                        </a>
+                        <br />
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+</body>
+
+
