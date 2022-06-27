@@ -109,7 +109,7 @@ namespace MedOffice.Controllers
             notificationBody += "<p> Ora la care erati programat:" + appointment.DateTime.Hour + "</p>";
             notificationBody += "<p>Ne cerem scuze pentru disconfortul creat!</p>";
 
-            ApplicationUser currUser = db.Users.Find(currentuserId);
+            ApplicationUser currUser = db.Users.Find(appointment.UserId);
             string sendTo = currUser.Email;
 
             if (appointment.DoctorId == docId)
