@@ -3,5 +3,33 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
+<br />
+<div class="text-center">
+    <h2>Lista programari</h2>
+</div>
+<br />
+@foreach (var app in ViewBag.AppointmentsList)
+{
+    <h1>@app.DateTime</h1>
+    <h2>Pacient:</h2>
+    <h3>@app.User.FirstName</h3>
+    <h3>@app.User.LastName</h3>
+    <h2>Doctor:</h2>
+    <h3>@app.Doctor.User.FirstName</h3>
+    <h3>@app.Doctor.User.LastName</h3>
+    <h2>Departament:</h2>
+    <h3>@app.Doctor.Department.DepartmentName</h3>
+    <h2>Locatie:</h2>
+    <h3>@app.Doctor.Location.Address</h3>
+    <h2>Descriere:</h2>
+    <h4>@app.Description</h4>
+
+    <form method="post" action="/Appointments/Delete/@app.AppointmentId">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button type="submit" class="btn btn-outline-danger">Anuleaza programarea</button>
+    </form>
+
+    <hr />
+}
 
