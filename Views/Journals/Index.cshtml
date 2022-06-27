@@ -1,1 +1,24 @@
-﻿
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<br />
+<br />
+<div class="align-items-center justify-content-center align-content-center" style="text-align:center">
+    <h3>Intari jurnal</h3>
+</div>
+<br />
+@foreach (var jj in ViewBag.journals)
+{
+    <p>@jj.Date</p>
+    <p>@jj.Title</p>
+    <p>@jj.Description</p>
+    <p>@jj.Simptoms</p>
+    <hr />
+}
+<div class="align-items-center justify-content-center align-content-center text-center">
+    <a href="/Journals/New" class="btn btn-outline-dark align-content-center justify-content-center" data-mdb-ripple-color="dark">
+        Adauga un jurnal nou
+    </a>
+</div>

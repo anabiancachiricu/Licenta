@@ -3,7 +3,8 @@
     ViewBag.Title = "New";
 }
 
-
+<link href="~/Content/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
 <body style="background-color: #eee;">
 
     <section class="vh-100">
@@ -13,7 +14,7 @@
                 <div class="col-lg-12 col-xl-11">
                     <div class="card text-black align-content-center align-items-center" style="border-radius: 25px;">
                         <div class="card-body p-md-5">
-                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Adaugare doctor </p>
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Adaugare programare </p>
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
@@ -21,37 +22,28 @@
                                     {
 
 
-
-                                        @Html.DropDownListFor(m => m.LocationId, new SelectList(Model.Locations, "Value", "Text"), "Selectati Locatia", new { @class = "form - control" })
-                                        <br />
-                                        <br />
-
-                                        @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.Departments, "Value", "Text"), "Selectati Departamentul", new { @class = "form - control" })
-                                        <br />
-                                        <br />
-
                                         @Html.DropDownListFor(m => m.DoctorId, new SelectList(Model.Doctors, "Value", "Text"), "Selectati Doctorul", new { @class = "form - control" })
                                         <br />
                                         <br />
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.DateTime, new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+                                            <input type="datetime-local" id="meeting-time"
+                                                   name="DateTime" value=@DateTime.Now
+                                                   min="2022-06-01T00:00" max="2025-06-15T00:00">
 
-                                        <label for="start">Selecteaza data </label>
+                                        </div>
+                                        <div class="form-group">
 
-                                        <input type="date" id="start" name="trip-start"
-                                               value="2022-06-17"
-                                               min="2022-01-01" max="2022-12-31">
+                                            @Html.Label("Description", "Descriere", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
 
-                                        <br />
-                                        <br />
 
-                                        <label for="appt">Alege ora:</label>
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
 
-                                        <input type="time" id="appt" name="appt"
-                                               min="09:00" max="18:00" required>
+                                                @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
 
-                                        <small>Programul este de la 9 la 18</small>
 
-                                        <br />
-                                        <br />
+                                            </div>
+                                        </div>
 
                                         <div class="form-group">
                                             <div class="row mb-4">
@@ -59,31 +51,50 @@
 
                                                     <div class="col-md-10 d-flex flex-row align-items-center mb-4">
 
-                                                        <button class="btn btn-sm btn-success" type="submit">
+                                                        <button class="btn btn-sm btn-outline-success" type="submit">
                                                             Adauga programarea
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+
                                     }
                                 </div>
-                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                                    <img src="https://pbs.twimg.com/media/EfJu2FbU4AA-NIf.jpg"
-                                         class="img-fluid" alt="Sample image" />
+                                        <img src="https://pbs.twimg.com/media/EfJu2FbU4AA-NIf.jpg"
+                                             class="img-fluid" alt="Sample image" />
 
-                                </div>
+                                    </div>
 
 
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+          </div>
     </section>
 
 
+    @section Scripts
+{
+        <script>
+            $(document).ready(function () {
+
+                $(function () {
+                    $('#startDate').datepicker({
+                        format: 'dd/mm/yyyy'
+                    });
+                });
+
+
+            });
+        </script>
+    }
+
 </body>
+

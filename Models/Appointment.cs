@@ -15,14 +15,11 @@ namespace MedOffice.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AppointmentId { get; set; }
         public int DoctorId { get; set; }
-        public int LocationId { get; set; }
-        public int DepartmentId { get; set; }
         public string UserId { get; set; }
         public string Description { get; set; }
+       
         public DateTime DateTime { get; set; }
 
-        public IEnumerable<SelectListItem> Departments { get; set; }
-        public IEnumerable<SelectListItem> Locations { get; set; }
         public IEnumerable<SelectListItem> Doctors { get; set; }
 
         public virtual ApplicationUser User { get; set; }

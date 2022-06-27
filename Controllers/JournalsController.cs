@@ -17,24 +17,31 @@ namespace MedOffice.Controllers
         // GET: Journals
         public ActionResult Index()
         {
+            string usId = User.Identity.GetUserId();
+            var journals = from jurns in db.Journals
+                           where jurns.UserId == usId
+                           select jurns;
+            ViewBag.journals = journals;
             return View();
         }
 
         public ActionResult New()
         {
-            Journal journal = new Journal();
-            journal.Date = DateTime.Now;
-            journal.UserId= User.Identity.GetUserId();
-            return View(journal);
+           
+            return View();
         }
 
         [HttpPost]
+        [Authorize(Roles ="User")]
         public ActionResult New(Journal journal)
         {
-            
+            string userId = User.Identity.GetUserId();
+            ViewBag.user = userId;
+            journal.UserId = userId;
+            journal.Date = DateTime.Now;
             if (ModelState.IsValid)
             {
-
+                
                 db.Journals.Add(journal);
 
                 db.SaveChanges();
@@ -42,7 +49,7 @@ namespace MedOffice.Controllers
             }
             else
             {
-                TempData["message"] = "Locatia nu a fost adaugata";
+                TempData["message"] = "Jurnalul nu a fost adaugat";
                 return View(journal);
             }
         }

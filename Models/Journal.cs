@@ -9,6 +9,10 @@ namespace MedOffice.Models
 {
     public class Journal
     {
+        public Journal()
+        {
+            Date = DateTime.Now.Date;
+        }
         [Key]
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,8 +22,8 @@ namespace MedOffice.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string Simptoms { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+
+        public DateTime? Date { get; set; }
 
         public virtual ApplicationUser User { get; set; }
     }

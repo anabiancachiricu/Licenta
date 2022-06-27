@@ -28,16 +28,22 @@
                     @if (User.IsInRole("User"))
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="/Locations/Index">Locatii</a>
+                            <a class="nav-link" href="/LocationDepartments/Index">Locatii si departamente</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link" href="/Departments/Index">Departamente</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
                             <a class="nav-link" href="/Doctors/Index">Doctori</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Investigations/Index">Investigatii</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Journals/Index">Jurnalul meu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Appointments/Index">Programarile mele</a>
                         </li>
                     }
                     @if (User.IsInRole("Administrator"))
@@ -68,10 +74,10 @@
                             <a class="nav-link" href="/Doctors/Edit">Editeaza Profilul</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Doctors/Show">Arata profilul</a>
+                            <a class="nav-link" href="/Doctors/Show/@ViewBag.docId">Arata profilul</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Programari</a>
+                            <a class="nav-link" href="/Appointments/Index">Programari</a>
                         </li>
                     }
 

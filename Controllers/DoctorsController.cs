@@ -75,13 +75,14 @@ namespace MedOffice.Controllers
             return selectList;
         }
 
-        public ActionResult New()
+        public ActionResult New(string userId)
         {
             Doctor doctor = new Doctor();
             doctor.Departments = GetAllDepartments();
             doctor.Locations = GetAllLocations();
-            doctor.UserId = ViewBag.user;
-            doctor.User = ViewBag.appUser;
+            ViewBag.user = userId;
+            
+            //doctor.User = ViewBag.appUser;
             return View(doctor);
         }
 
@@ -106,36 +107,50 @@ namespace MedOffice.Controllers
 
 
 
-
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(int id)
+        [Authorize(Roles = "Doctor, User")]
+        public ActionResult Edit()
         {
-            Doctor doctor = db.Doctors.Find(id);
-            doctor.Departments = GetAllDepartments();
-            doctor.Locations = GetAllLocations();
+            string id = User.Identity.GetUserId();
+            ApplicationUser user = db.Users.Find(id);
 
-            ViewBag.DocDep = doctor.Departments.FirstOrDefault();
-            ViewBag.DocLoc = doctor.Locations.FirstOrDefault();
-
-            return View(doctor);
+            return View(user);
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Doctor, User")]
         [HttpPut]
-        public ActionResult Edit(int id, Doctor newData)
+        public ActionResult Edit(ApplicationUser newData)
         {
-            Doctor doctor = db.Doctors.Find(id);
-            
+            string id = User.Identity.GetUserId();
+
            
+            
+
+
             try
             {
-                ApplicationDbContext context = new ApplicationDbContext();
-              
-                if (TryUpdateModel(doctor))
-                {
+                ApplicationUser user = db.Users.Find(id);
 
-                    doctor.DepartmentId = newData.DepartmentId;
-                    doctor.LocationId = newData.LocationId;
+                //byte[] imageData = null;
+                //if (Request.Files.Count > 0)
+                //{
+                //    HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+                //    using (var binary = new BinaryReader(poImgFile.InputStream))
+                //    {
+                //        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                //    }
+                //}
+                ////Here we pass the byte array to user context to store in db    
+                //user.UserPhoto = imageData;
+
+                if (TryUpdateModel(user))
+                {
+                    
+                    user.UserName = newData.UserName;
+                    user.FirstName = newData.FirstName;
+                    user.LastName = newData.LastName;
+                    user.Description = newData.Description;
+                    user.PhoneNumber = newData.PhoneNumber;
                     db.SaveChanges();
 
 
@@ -177,6 +192,23 @@ namespace MedOffice.Controllers
             {
                 return new FileContentResult(doc.User.UserPhoto, "image/jpeg");
             }
+
+        }
+        
+        [Authorize(Roles="Administrator, User, Doctor")]
+        public ActionResult Show(int id)
+        {
+           
+            Doctor doctor = db.Doctors.Find(id);
+            ViewBag.doctor = doctor;
+            ApplicationUser user = db.Users.Find(doctor.UserId);
+            ViewBag.user = user;
+            Department department = db.Departments.Find(doctor.DepartmentId);
+            ViewBag.department = department;
+            Location location = db.Locations.Find(doctor.LocationId);
+            ViewBag.location = location;
+
+            return View(doctor);
 
         }
 

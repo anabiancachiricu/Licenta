@@ -3,30 +3,34 @@
     ViewBag.Title = "Show";
 }
 
+<div style="text-align:center">
+    <br />
+    <h2>@ViewBag.Location.City</h2>
+    <h3>@ViewBag.Location.Address</h3>
 
-<h1>Afisare Locatie</h1>
-<h2>@ViewBag.Location.City</h2>
-<p>@ViewBag.Location.Address</p>
 
+    @if (User.IsInRole("Administrator"))
+    {
+        <a href="/Locations/Edit/@ViewBag.Location.LocationId" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+           
+                Afisare lista locatii si departamente
+            
+        </a>
+        <form method="post" action="/Locations/Delete/@ViewBag.LocationId">
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button type="submit" class="btn btn-outline-danger">Sterge Locatie</button>
+        </form>
+        <hr />
+        <a href="/Locations/New" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">Adauga locatie</a>
 
-@if (User.IsInRole("Administrator"))
-{
-    <a href="/Locations/Edit/@ViewBag.Location.LocationId">Modifica Locatie</a>
-    <form method="post" action="/Locations/Delete/@ViewBag.LocationId">
-        @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button type="submit">Sterge Locatie</button>
-    </form>
-    <hr />
-    <a href="/Locations/New">Adauga locatie</a>
+    }
 
-}
+    <a href="/Locations/Index" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">Inapoi la locatii</a>
+    <br />
+    <br />
+    
+</div>
 
-<a href="/Locations/Index">Inapoi la locatii</a>
-<br />
-<br />
-<br />
-<p>@ViewBag.Latitude</p>
-<p>@ViewBag.Longitude</p>
 <fieldset>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

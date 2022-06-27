@@ -1,6 +1,6 @@
 ﻿@model MedOffice.Models.LocationDepartment
 @{
-    ViewBag.Title = "Idex";
+    ViewBag.Title = "Index";
 }
 
 <body style="background-color: #eee">
@@ -40,13 +40,13 @@
                     <br />
                 }
 
-
-
-                <a href="/LocationDepartments/Index/">
-                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
-                        Afisare lista locatii si departamente
-                    </button>
+                <a href="/Locations/Index" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                    Afiseaza locatii
                 </a>
+                <a href="/Departments/Index" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                    Afiseaza departamente
+                </a>
+
                 <br />
                 @if (User.IsInRole("Administrator"))
                 {

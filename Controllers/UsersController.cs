@@ -140,7 +140,7 @@ namespace MedOffice.Controllers
                     var selectedRole = db.Roles.Find(HttpContext.Request.Params.Get("newRole"));
 
                     UserManager.AddToRole(id, selectedRole.Name);
-
+                    
                     db.SaveChanges();
 
                     if(selectedRole.Name=="Doctor")
@@ -159,9 +159,10 @@ namespace MedOffice.Controllers
                         //     select doc.DoctorId;
                         //int docId = selectedDoc.FirstOrDefault();
                         //Console.WriteLine(docId);
+
                         ViewBag.user = id;
                         ViewBag.appUser = user;
-                        return RedirectToAction("New", "Doctors");
+                        return RedirectToAction("New", "Doctors", new { userId = id });
                     }
                     else
                     {

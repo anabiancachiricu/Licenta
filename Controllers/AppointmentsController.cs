@@ -24,42 +24,6 @@ namespace MedOffice.Controllers
 
 
         [NonAction]
-        public IEnumerable<SelectListItem> GetAllDepartments()
-        {
-            var selectList = new List<SelectListItem>();
-            var deps = from departments in db.Departments
-                       select departments;
-            foreach (var dep in deps)
-            {
-                selectList.Add(new SelectListItem
-                {
-                    Value = dep.DepartmentId.ToString(),
-                    Text = dep.DepartmentName.ToString()
-
-                });
-            }
-            return selectList;
-        }
-
-        [NonAction]
-        public IEnumerable<SelectListItem> GetAllLocations()
-        {
-            var selectList = new List<SelectListItem>();
-            var locs = from locations in db.Locations
-                       select locations;
-            foreach (var loc in locs)
-            {
-                selectList.Add(new SelectListItem
-                {
-                    Value = loc.LocationId.ToString(),
-                    Text = loc.Address.ToString()
-
-                });
-            }
-            return selectList;
-        }
-
-
         public IEnumerable<SelectListItem> GetAllDoctors()
         {
             var selectList = new List<SelectListItem>();
@@ -68,15 +32,13 @@ namespace MedOffice.Controllers
             
             foreach (var doc in docs)
             {
-               
+
                 selectList.Add(new SelectListItem
                 {
                     Value = doc.DoctorId.ToString(),
+                    Text = doc.User.UserName.ToString()
+                }) ;
 
-                    Text = doc.DepartmentId.ToString()
-
-                }); ;
-               
             }
             return selectList;
         }
@@ -84,27 +46,29 @@ namespace MedOffice.Controllers
         public ActionResult New()
         {
             Appointment appointment = new Appointment();
-            appointment.Departments = GetAllDepartments();
-            appointment.Locations = GetAllLocations();
             appointment.Doctors = GetAllDoctors();
-            appointment.UserId = User.Identity.GetUserId();
-            appointment.User = db.Users.Find(appointment.UserId);
+            
+            //appointment.User = db.Users.Find(appointment.UserId);
             return View(appointment);
         }
 
         [HttpPost]
+        [Authorize(Roles="User")]
         public ActionResult New(Appointment appointment)
         {
-
-            try
+            
+            appointment.UserId = User.Identity.GetUserId();
+            appointment.DateTime = Convert.ToDateTime(Request.Form["DateTime"]);
+            if(ModelState.IsValid)
             {
+
                 db.Appointments.Add(appointment);
                 db.SaveChanges();
-                TempData["message"] = "Programarea a fost adaugata!";
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+            else
             {
+                TempData["message"] = "Programarea nu a fost adaugata";
                 return View(appointment);
             }
         }

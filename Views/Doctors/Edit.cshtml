@@ -1,10 +1,4 @@
-﻿@model MedOffice.Models.Doctor
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
+﻿@model MedOffice.Models.ApplicationUser
 
 
 <body style="background-color: #eee;">
@@ -20,15 +14,81 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Doctors", routeValues: new { id = @Model.DoctorId }))
+                                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Doctors"))
                                     {
                                         @Html.HttpMethodOverride(HttpVerbs.Put)
 
 
-                                        @Html.DropDownListFor(m => m.LocationId, new SelectList(Model.Locations, "Value", "Text"), "Selectati Locatia", new { @class = "form - control" })
+                                        <div class="form-group">
 
-                                        @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.Departments, "Value", "Text"), "Selectati Departamentul", new { @class = "form - control" })
-                                        <br />
+                                            @Html.Label("UserName", "Nume utilizator", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+
+                                            @Html.Label("LastName", "Nume", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            @Html.Label("FirstName", "Prenume", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+
+                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+
+                                            @Html.Label("PhoneNumber", "Numar telefon", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+                                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+
+                                            @Html.Label("Description", "Descriere", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+
+
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+                                                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-10 control-label" })
+                                            <div class="col-md-10 ">
+                                                <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+                                            </div>
+                                        </div>
+
+
 
                                         <div class="form-group">
                                             <div class="row mb-4">
@@ -36,9 +96,8 @@
 
                                                     <div class="col-md-10 d-flex flex-row align-items-center mb-4">
 
-                                                        <button class="btn btn-sm btn-success" type="submit">
-                                                            Modifica datele
-                                                            doctorului
+                                                        <button class="btn btn-sm btn-outline-success" type="submit">
+                                                            Modifica profilul
                                                         </button>
                                                     </div>
                                                 </div>

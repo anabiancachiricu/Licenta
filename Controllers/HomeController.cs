@@ -12,8 +12,11 @@ namespace MedOffice.Controllers
 {
     public class HomeController : Controller
     {
+        ApplicationDbContext db = ApplicationDbContext.Create();
         public ActionResult Index()
         {
+            
+            
             return View();
         }
 

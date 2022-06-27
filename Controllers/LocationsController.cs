@@ -56,9 +56,12 @@ namespace MedOffice.Controllers
             location.Latitude = point.Latitude;
             location.Longitude = point.Longitude;
 
-            ViewBag.Latitude = location.Latitude;
-            ViewBag.Longitude = location.Longitude;
-            
+            string lati = (location.Latitude - Math.Truncate(location.Latitude)).ToString().Split(',').Last();
+            ViewBag.Latitude = Math.Truncate(location.Latitude).ToString() + "." + lati;
+
+            string longi= (location.Longitude - Math.Truncate(location.Longitude)).ToString().Split(',').Last();
+            ViewBag.Longitude = Math.Truncate(location.Longitude).ToString() + "." + longi;
+
             return View();
 
         }
