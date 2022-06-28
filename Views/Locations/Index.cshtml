@@ -61,21 +61,23 @@
     </tbody>
 </table>
 
-<span>
-    <a href="/Departments/Index/">
-        <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+
+<div class="text-center align-content-center align-items-center justify-content-center">
+    <span class="text-center align-content-center align-items-center justify-content-center">
+        <a href="/Departments/Index/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+
             Afisare lista departamente
-        </button>
-    </a>
-</span>
-@if (User.IsInRole("Administrator"))
-{
-    <span>
-        <a href="/Locations/New">
-            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
-                Adauga locatie
-            </button>
+
         </a>
     </span>
-}
+    @if (User.IsInRole("Administrator"))
+    {
+        <span class="text-center align-content-center align-items-center justify-content-center">
+            <a href="/Locations/New" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                Adauga locatie
+
+            </a>
+        </span>
+    }
+</div>
 

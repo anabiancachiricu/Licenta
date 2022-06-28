@@ -20,7 +20,7 @@
 
                                     @using (Html.BeginForm(actionName: "New", controllerName: "Investigations"))
                                     {
-                                        
+                                        @Html.ValidationSummary("", new { @class = "text-danger" })
                                         <div class="form-group">
 
                                             @Html.Label("Name", "Nume investigatie", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
@@ -47,7 +47,7 @@
                                         <div class="form-group">
                                             <i class="glyphicon glyphicon-th-list"></i>
                                             <label>Selectati Departamentul</label>
-                                            @Html.DropDownListFor(m=> m.DepartmentId, new SelectList(Model.Departments, "Value", "Text"), "Selectati departamentul" , new { @class = "form-control" })
+                                            @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.Departments, "Value", "Text", Model.Departments.First()), null, new { @class = "form-control" })
                                         </div>
                                         <br />
 

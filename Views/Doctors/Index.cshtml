@@ -68,26 +68,25 @@
 
                         }
 
-                    <div class="text-center align-content-center align-items-center justify-content-center"
-                         @if (User.IsInRole("Administrator")) 
-                         { 
-                             <a href="/LocationDepartments/New">
-                                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <span class="text-center align-content-center align-items-center justify-content-center" >
+                                <a href="/LocationDepartments/New/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
                                     Asociaza locatie si departament
-                                </button>
-                            </a>
+                                </a>
+                            </span>
                             <br />
-                         }
-
-                        <a href="/LocationDepartments/Index/">
-                            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
-                                Afisare lista locatii si departamente
-                            </button>
+                        }
+                        <span class="text-center align-content-center align-items-center justify-content-center">
+                        <a href="/LocationDepartments/Index/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                            Afisare lista locatii si departamente
                         </a>
+                        </span>
                         <br />
-                        </div>
-
                     </div>
+
+                    
                 </li>
 
             </ul>

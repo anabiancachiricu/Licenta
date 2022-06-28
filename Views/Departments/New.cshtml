@@ -20,7 +20,7 @@
 
                                     @using (Html.BeginForm(actionName: "New", controllerName: "Departments"))
                                     {
-
+                                        @Html.ValidationSummary("", new { @class = "text-danger" })
                                         <div class="form-group">
 
                                             @Html.Label("DepartmentName", "Nume departament", new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })

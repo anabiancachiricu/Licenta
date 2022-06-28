@@ -9,26 +9,101 @@
     <h2>Lista programari</h2>
 </div>
 <br />
+
 @foreach (var app in ViewBag.AppointmentsList)
 {
-    <h1>@app.DateTime</h1>
-    <h2>Pacient:</h2>
-    <h3>@app.User.FirstName</h3>
-    <h3>@app.User.LastName</h3>
-    <h2>Doctor:</h2>
-    <h3>@app.Doctor.User.FirstName</h3>
-    <h3>@app.Doctor.User.LastName</h3>
-    <h2>Departament:</h2>
-    <h3>@app.Doctor.Department.DepartmentName</h3>
-    <h2>Locatie:</h2>
-    <h3>@app.Doctor.Location.Address</h3>
-    <h2>Descriere:</h2>
-    <h4>@app.Description</h4>
 
-    <form method="post" action="/Appointments/Delete/@app.AppointmentId">
-        @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button type="submit" class="btn btn-outline-danger">Anuleaza programarea</button>
-    </form>
+    <body class="vh-100" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-6 mb-4 mb-lg-0">
+                    <div class="card mb-3" style="border-radius: .5rem;">
+                        <div class="row g-0">
+                            <div class="col-md-4 gradient-custom text-center text-black"
+                                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+
+                                <br />
+                                <br />
+                                <h5>@app.DateTime</h5>
+                               
+                                @if (app.DateTime > DateTime.Now)
+                                {
+                                    <p>Urmeaza</p>
+                                }
+                                else
+                                {
+                                    <p>Realizata</p>
+                                }
+
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body p-4">
+                                    <h6>Doctor:</h6>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h6>Prenume:</h6>
+                                            <p class="text-muted">@app.Doctor.User.FirstName</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Nume:</h6>
+                                            <p class="text-muted">@app.Doctor.User.LastName</p>
+                                        </div>
+                                    </div>
+                                    <h6>Pacient:</h6>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h6>Prenume:</h6>
+                                            <p class="text-muted">@app.User.FirstName</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Nume:</h6>
+                                            <p class="text-muted">@app.User.LastName</p>
+                                        </div>
+                                    </div>
+                                    <h6>Detalii:</h6>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h6>Specializare</h6>
+                                            <p class="text-muted">@app.Doctor.Department.DepartmentName</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Cabinet</h6>
+                                            <p class="text-muted">@app.Doctor.Location.Address</p>
+                                        </div>
+                                    </div>
+                                    <h6>Descriere:</h6>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h6>Specializare</h6>
+                                            <p class="text-muted">@app.Description</p>
+                                        </div>
+
+                                    </div>
+                                    <hr class="mt-0 mb-4">
+                                    @if (User.IsInRole("Doctor"))
+                                    {
+                                        <form method="post" action="/Appointments/Delete/@app.AppointmentId">
+                                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                            <button type="submit" class="btn btn-outline-danger">Anuleaza programarea</button>
+                                        </form>
+                                    }
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    
 
     <hr />
 }

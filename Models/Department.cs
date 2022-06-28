@@ -13,9 +13,9 @@ namespace MedOffice.Models
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DepartmentId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Numele este obligatoriu")]
         public string DepartmentName { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Descrierea este obligatorie")]
         public string DepartmentDescription { get; set; }
 
         public virtual ICollection<Location> Locations { get; set; }

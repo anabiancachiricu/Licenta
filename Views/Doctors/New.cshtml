@@ -19,17 +19,17 @@
 
                                     @using (Html.BeginForm(actionName: "New", controllerName: "Doctors"))
                                     {
-                                        
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.UserId, new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
-                                        <div class="col-md-10 d-flex flex-row align-items-center mb-4">
-                                            @Html.TextBoxFor(m=>m.UserId,  new { @value=ViewBag.user, @readonly = "readonly" })
+                                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.UserId, new { @class = "col-md-10 d-flex flex-row align-items-center  mb-4 control-label" })
+                                            <div class="col-md-10 d-flex flex-row align-items-center mb-4">
+                                                @Html.TextBoxFor(m => m.UserId, new { @value = ViewBag.user, @readonly = "readonly" })
+                                            </div>
                                         </div>
-                                    </div>
-                                        @Html.DropDownListFor(m => m.LocationId, new SelectList(Model.Locations, "Value", "Text"), "Selectati Locatia", new { @class = "form - control" })
+                                        @Html.DropDownListFor(m => m.LocationId, new SelectList(Model.Locations, "Value", "Text", Model.Locations.First()), null, new { @class = "form - control" })
                                         <br />
 
-                                        @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.Departments, "Value", "Text"), "Selectati Departamentul", new { @class = "form - control" })
+                                        @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.Departments, "Value", "Text", Model.Departments.First()), null, new { @class = "form - control" })
                                         <br />
 
                                         <div class="form-group">

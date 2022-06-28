@@ -14,11 +14,11 @@ namespace MedOffice.Models
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int InvestigationId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Numele este necesar")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Pretul este necesar")]
         public float Price { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Este necesara selectarea unui departament")]
         public int DepartmentId { get; set; }
         public IEnumerable<SelectListItem> Departments { get; set; }
         public virtual Department Department { get; set; }

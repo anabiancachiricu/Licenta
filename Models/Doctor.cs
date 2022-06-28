@@ -14,8 +14,11 @@ namespace MedOffice.Models
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DoctorId { get; set; }
+        [Required(ErrorMessage ="Nu poti adauga doctor fara utilizator")]
         public string UserId { get; set; }
+        [Required(ErrorMessage ="Este necesara selectarea unui departament")]
         public int DepartmentId { get; set; }
+        [Required(ErrorMessage ="Este necesara selectarea unei locatii")]
         public int LocationId { get; set; }
 
         public IEnumerable<SelectListItem> Departments { get; set; }
