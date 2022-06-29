@@ -67,6 +67,7 @@ namespace MedOffice.Controllers
 
         public ActionResult New()
         {
+            
             Appointment appointment = new Appointment();
             appointment.Doctors = GetAllDoctors();
             
@@ -78,19 +79,66 @@ namespace MedOffice.Controllers
         [Authorize(Roles="User")]
         public ActionResult New(Appointment appointment)
         {
-            
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
+            appointment.Doctors = GetAllDoctors();
             appointment.UserId = User.Identity.GetUserId();
             appointment.DateTime = Convert.ToDateTime(Request.Form["DateTime"]);
             if(ModelState.IsValid)
             {
+                //int compare = DateTime.Compare(appointment.DateTime, DateTime.Now);
+                if(appointment.DateTime<DateTime.Now)
+                {
+                    ViewBag.mess = "Nu se poate selecta o data din trecut";
+                    return View(appointment);
+                }
+                else
+                {
+                    DateTime startTime = DateTime.Parse("2022/06/06 09:00:00");
+                    DateTime endTime = DateTime.Parse("2022/06/06 18:00:00");
 
-                db.Appointments.Add(appointment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    if(appointment.DateTime.TimeOfDay < startTime.TimeOfDay)
+                    {
+                        ViewBag.mess = "Nu se poate alege o ora mai devreme de 9:00";
+                        return View(appointment);
+                    }
+                    else
+                    {
+                        if (appointment.DateTime.TimeOfDay > endTime.TimeOfDay)
+                        {
+                            ViewBag.mess = "Nu se poate alege o ora mai tarziu de 18";
+                            return View(appointment);
+                        }
+                        else
+                        {
+                            var apps = from app in db.Appointments
+                                       where app.DoctorId == appointment.DoctorId && app.DateTime == appointment.DateTime
+                                       select app;
+                            int exist = apps.Count();
+                            if(exist!=0)
+                            {
+                                ViewBag.mess = "Intervalul este ocupat deja";
+                                return View(appointment);
+                            }
+                            else
+                            {
+                                db.Appointments.Add(appointment);
+                                db.SaveChanges();
+                                return RedirectToAction("Index");
+                            }
+                            
+                               
+                           
+                        }
+                    }
+                }
+                
             }
             else
             {
-                TempData["message"] = "Programarea nu a fost adaugata";
+                ViewBag.mess = "Programarea nu a fost adaugata";
                 return View(appointment);
             }
         }

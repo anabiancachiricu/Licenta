@@ -39,12 +39,26 @@ namespace MedOffice.Controllers
                 search = Request.Params.Get("search").Trim();
                 List<int> LocDepIds = db.LocationDepartments.Where(
                     ld => ld.Department.DepartmentName.Contains(search) 
-                    || ld.Location.Address.Contains(search))
+                    )
                     .Select(ld => ld.LocDepId).ToList();
+               
+                ViewBag.LocationDepartmentsCount = locss.Count();
+
             }
+            
 
 
             return View();
+        }
+
+        [Authorize(Roles = "Admin,User")]
+        public List<LocationDepartment> getSearchLocDeps(string keyword)
+        {
+            var docIds = (from doc in db.LocationDepartments.Include("Location").Include("Department")
+                          orderby doc.LocDepId
+                          where doc.Department.DepartmentName.Contains(keyword)
+                          select doc).ToList();
+            return docIds;
         }
 
         [NonAction]

@@ -5,13 +5,63 @@
 
 
 <body style="background-color:#eee" class="align-items-center align-content-center">
+    <br />
+    <br />
+    <section>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form class="card card-sm" method="GET">
+                    <div class="card-body row no-gutters align-items-center" style="display:inline-flex">
+                        <div class="col-auto" style="float:right; width:200px; height:100px">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                        <!--end of col-->
+                        <div class="col" style="float:right; width:200px">
+                            <input class="form-control form-control-lg form-controlborderless" type="text" name="search" style="height: 45px"
+                                   value="@ViewBag.SearchString"
+                                   placeholder="Search doctor">
+                        </div>
+                        <!--end of col-->
+                        <div class="col-auto" style="float:left; padding-left:3px">
+                            <button class="btn btn-lg btn-outline-dark"
+                                    type="submit">
+                                Search
+                            </button>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <!--end of col-->
+
+                </form>
+            </div>
+        </div>
+        <!--end of col-->
+
+    </section>
+    <br />
+    <h3 class="text-center">Afisare doctori</h3>
+    <br />
+    <br />
+    @if (User.IsInRole("User"))
+    {
+        <div class="text-center align-content-center align-items-center ">
+            <span class="text-center align-content-center align-items-center justify-content-center">
+                <a href="/Doctors/Index/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                    Afiseaza doctorii pe departamente
+                </a>
+            </span>
+            <span class="text-center align-content-center align-items-center justify-content-center">
+                <a href="/Doctors/Index2/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                    Afiseaza doctorii pe locatii
+                </a>
+            </span>
+            <br />
+        </div>
+    }
 
     <section class="vh-100">
         <div class="container h-100 align-content-center justify-content-between align-items-center" style="border-radius: 15px;">
-            <br />
-            <br />
-            <h3 class="text-center">Afisare doctori</h3>
-            <br />
             <br />
 
             <ul class="list-group list-group-light align-content-center align-items-center " style="border-radius: 15px;">
@@ -71,7 +121,7 @@
 
                         @if (User.IsInRole("Administrator"))
                         {
-                            <span class="text-center align-content-center align-items-center justify-content-center" >
+                            <span class="text-center align-content-center align-items-center justify-content-center">
                                 <a href="/LocationDepartments/New/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
                                     Asociaza locatie si departament
                                 </a>
@@ -79,14 +129,14 @@
                             <br />
                         }
                         <span class="text-center align-content-center align-items-center justify-content-center">
-                        <a href="/LocationDepartments/Index/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
-                            Afisare lista locatii si departamente
-                        </a>
+                            <a href="/LocationDepartments/Index/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                Afisare lista locatii si departamente
+                            </a>
                         </span>
                         <br />
                     </div>
 
-                    
+
                 </li>
 
             </ul>

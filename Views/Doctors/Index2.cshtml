@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Index2";
+}
+
+
+<body style="background-color:#eee" class="align-items-center align-content-center">
+
+    <br />
+    <br />
+    <h3 class="text-center">Afisare doctori in functie de locatie</h3>
+    <br />
+
+
+    <section class="vh-100">
+        <div class="container h-100 align-content-center justify-content-between align-items-center" style="border-radius: 15px;">
+            <br />
+            @if (User.IsInRole("User"))
+            {
+                <div class="text-center align-content-center align-items-center ">
+                    <span class="text-center align-content-center align-items-center justify-content-center">
+                        <a href="/Doctors/Index/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                            Afiseaza doctorii neordonati
+                        </a>
+                    </span>
+                    <span class="text-center align-content-center align-items-center justify-content-center">
+                        <a href="/Doctors/Index1/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                            Afiseaza doctorii pe departamente
+                        </a>
+                    </span>
+                    <br />
+                </div>
+            }
+            <br />
+            <ul class="list-group list-group-light align-content-center align-items-center " style="border-radius: 15px;">
+
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                    <div class="row align-content-center align-items-center">
+
+                        @foreach (IGrouping<int, MedOffice.Models.Doctor> group in ViewBag.DoctorsLocList)
+                        {
+                            <hr />
+
+                            if (ViewBag.DoctorsCount != 0)
+                            {
+                                foreach (var doc in group)
+                                {
+                                    <div class="col-xl-6 col-lg-4  mb-4 ">
+
+                                        <div class="card ">
+
+                                            <div class="row g-0">
+                                                <div class="col-md-4">
+                                                    <img src="@Url.Action("DoctorPhoto", "Doctors", new { docId = doc.DoctorId })"
+                                                         alt="Doctors' profile picture"
+                                                         class="img-fluid rounded-start"
+                                                         style="height:200px" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <span>
+                                                            <h5 class="card-title">@doc.User.FirstName </h5>
+                                                            <h5 class="card-title">@doc.User.LastName</h5>
+                                                        </span>
+                                                        <p class="card-text">@doc.Department.DepartmentName</p>
+                                                        <h3 class="card-text">@doc.Location.Address</h3>
+
+                                                        <p class="card-text">
+                                                            <small class="text-muted">@doc.User.PhoneNumber</small>
+                                                            <small class="text-muted">@doc.User.Email</small>
+                                                        </p>
+                                                    </div>
+                                                    <div class="card-footer text-center align-content-center align-items-center">
+                                                        <a href="/Doctors/Show/@doc.DoctorId">
+                                                            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                                                Vezi detalii
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                }
+                            }
+
+                        }
+
+
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <span class="text-center align-content-center align-items-center justify-content-center">
+                                <a href="/LocationDepartments/New/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                    Asociaza locatie si departament
+                                </a>
+                            </span>
+                            <br />
+                        }
+                        <span class="text-center align-content-center align-items-center justify-content-center">
+                            <a href="/LocationDepartments/Index/" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
+                                Afisare lista locatii si departamente
+                            </a>
+                        </span>
+                        <br />
+                    </div>
+
+
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+</body>
+
+

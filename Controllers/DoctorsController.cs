@@ -15,6 +15,31 @@ namespace MedOffice.Controllers
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
+       
+        public ActionResult Index1()
+        {
+            var docs = (from doc in db.Doctors.Include("Department").Include("Location").Include("User")
+                        group doc by doc.DepartmentId into docDepGroup
+                        where docDepGroup.Count()>=1
+                        orderby docDepGroup.Key
+                        select docDepGroup).ToList();
+            ViewBag.DoctorsDepList = docs;
+            ViewBag.DoctorsDepCount = docs.Count();
+            return View();
+        }
+
+        public ActionResult Index2()
+        {
+            var docs = (from doc in db.Doctors.Include("Department").Include("Location").Include("User")
+                        group doc by doc.LocationId into docLocGroup
+                        where docLocGroup.Count() >= 1
+                        orderby docLocGroup.Key
+                        select docLocGroup).ToList();
+            ViewBag.DoctorsLocList = docs;
+            ViewBag.DoctorsLocCount = docs.Count();
+            return View();
+        }
+
         // GET: Doctors
         public ActionResult Index()
         {
@@ -34,7 +59,32 @@ namespace MedOffice.Controllers
 
             }
             ViewBag.docs = DocsList;
+
+            var search = "";
+            if (Request.Params.Get("search") != null)
+            {
+                search = Request.Params.Get("search").Trim();
+                List<int> docsIds = db.Doctors.Include("User").Where(
+                    dcs => dcs.User.UserName.Contains(search)).Select(u => u.DoctorId).ToList();
+                docs = (db.Doctors.Where(dc => docsIds.Contains(dc.DoctorId))).ToList();
+                ViewBag.CountDoctors = docs.Count();
+            }
+            else
+            {
+                ViewBag.CountDoctors = 0;
+            }
+            ViewBag.DoctorsList = docs;
             return View();
+        }
+
+        [Authorize(Roles = "Admin,User")]
+        public List<Doctor> getSearchDoctors(string keyword)
+        {
+            var docIds = (from doc in db.Doctors.Include("User")
+                           orderby doc.DoctorId
+                           where doc.User.UserName.Contains(keyword)
+                           select doc).ToList();
+            return docIds;
         }
 
         [NonAction]

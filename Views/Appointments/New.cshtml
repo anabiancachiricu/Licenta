@@ -17,10 +17,15 @@
                             <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Adaugare programare </p>
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
+                                    <br />
+                                    <p class="text-danger"> @ViewBag.mess</p>
+                                    
                                     @using (Html.BeginForm(actionName: "New", controllerName: "Appointments"))
                                     {
-
+                                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                                        <br />
+                                        <p class="text-danger"> @ViewBag.message</p>
+                                        <br />
 
                                         @Html.DropDownListFor(m => m.DoctorId, new SelectList(Model.Doctors, "Value", "Text", Model.Doctors.First()), null, new { @class = "form - control" })
                                         <br />

@@ -54,6 +54,7 @@ namespace MedOffice.Controllers
         [HttpPost]
         public ActionResult New(Investigation investigation)
         {
+            investigation.Departments = GetAllDepartments();
             try
             {
                 db.Investigations.Add(investigation);

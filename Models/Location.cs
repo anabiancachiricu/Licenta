@@ -13,13 +13,13 @@ namespace MedOffice.Models
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LocationId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Orasul este necesar")]
         public string City { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Adresa este necesara")]
         public string Address { get; set; }
-        [Required]
+        
         public double Latitude { get; set; }
-        [Required]
+        
         public double Longitude { get; set; }
       
         public virtual ICollection<Department> Departments { get; set; }

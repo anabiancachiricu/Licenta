@@ -205,6 +205,9 @@ namespace MedOffice.Controllers
                     if (TryUpdateModel(user))
                     {
                         user.UserName = newData.UserName;
+                        user.FirstName = newData.FirstName;
+                        user.LastName = newData.LastName;
+                        user.Description = newData.Description;
                         user.Email = newData.Email;
                         user.PhoneNumber = newData.PhoneNumber;
                         var roles = from role in db.Roles select role;

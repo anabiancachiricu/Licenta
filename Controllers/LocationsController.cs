@@ -89,6 +89,12 @@ namespace MedOffice.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult New(Location location)
         {
+            var locationService = new GoogleLocationService("AIzaSyAGiM9eKTPSUqdPUGJQUIQS7b4A9pmGCvw");
+            var point = locationService.GetLatLongFromAddress(location.Address);
+
+            location.Latitude = point.Latitude;
+            location.Longitude = point.Longitude;
+
             if (ModelState.IsValid)
             {
 

@@ -452,6 +452,8 @@
     <Content Include="Views\Appointments\Index.cshtml" />
     <Content Include="Views\Appointments\New.cshtml" />
     <Content Include="Views\Doctors\Show.cshtml" />
+    <Content Include="Views\Doctors\Index1.cshtml" />
+    <Content Include="Views\Doctors\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
