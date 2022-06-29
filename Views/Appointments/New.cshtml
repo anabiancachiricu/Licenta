@@ -22,7 +22,7 @@
                                     {
 
 
-                                        @Html.DropDownListFor(m => m.DoctorId, new SelectList(Model.Doctors, "Value", "Text"), "Selectati Doctorul", new { @class = "form - control" })
+                                        @Html.DropDownListFor(m => m.DoctorId, new SelectList(Model.Doctors, "Value", "Text", Model.Doctors.First()), null, new { @class = "form - control" })
                                         <br />
                                         <br />
                                         <div class="form-group">

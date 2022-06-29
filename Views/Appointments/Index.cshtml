@@ -25,7 +25,7 @@
                                 <br />
                                 <br />
                                 <h5>@app.DateTime</h5>
-                               
+
                                 @if (app.DateTime > DateTime.Now)
                                 {
                                     <p>Urmeaza</p>
@@ -78,7 +78,7 @@
                                     <hr class="mt-0 mb-4">
                                     <div class="row pt-1">
                                         <div class="col-6 mb-3">
-                                            <h6>Specializare</h6>
+                                            
                                             <p class="text-muted">@app.Description</p>
                                         </div>
 
@@ -103,8 +103,15 @@
         </div>
     </body>
 
-    
 
-    <hr />
+
+
 }
-
+<hr />
+<div class="align-items-center justify-content-center align-content-center text-center">
+    <a href="/Appointments/New" class="btn btn-outline-dark align-content-center justify-content-center" data-mdb-ripple-color="dark">
+        Adauga o programare
+    </a>
+</div>
+<br />
+<br />
