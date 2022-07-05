@@ -86,10 +86,14 @@
                                     <hr class="mt-0 mb-4">
                                     @if (User.IsInRole("Doctor"))
                                     {
-                                        <form method="post" action="/Appointments/Delete/@app.AppointmentId">
-                                            @Html.HttpMethodOverride(HttpVerbs.Delete)
-                                            <button type="submit" class="btn btn-outline-danger">Anuleaza programarea</button>
-                                        </form>
+                                        if (app.DateTime > DateTime.Now)
+                                        {
+
+                                            <form method="post" action="/Appointments/Delete/@app.AppointmentId">
+                                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                                <button type="submit" class="btn btn-outline-danger">Anuleaza programarea</button>
+                                            </form>
+                                        }
                                     }
 
 

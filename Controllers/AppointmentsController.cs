@@ -113,8 +113,12 @@ namespace MedOffice.Controllers
                         }
                         else
                         {
+                            var maxTime = appointment.DateTime.AddMinutes(30);
+                            var minTime = appointment.DateTime.AddMinutes(-30);
                             var apps = from app in db.Appointments
-                                       where app.DoctorId == appointment.DoctorId && app.DateTime == appointment.DateTime
+                                       where (app.DoctorId == appointment.DoctorId && app.DateTime == appointment.DateTime)
+                                       ||  (app.DoctorId==appointment.DoctorId && app.DateTime>=appointment.DateTime && app.DateTime<maxTime)
+                                       || (app.DoctorId == appointment.DoctorId && app.DateTime >=minTime && app.DateTime < appointment.DateTime)
                                        select app;
                             int exist = apps.Count();
                             if(exist!=0)
